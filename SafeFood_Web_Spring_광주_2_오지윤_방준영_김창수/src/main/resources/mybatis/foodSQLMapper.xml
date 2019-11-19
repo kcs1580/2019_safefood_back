@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Member객체의 mybatis 설정 문제 -->
+<mapper namespace="com.food">
+
+	<update id="foodUpdate" parameterType="FoodDTO">
+		update food set
+		name =
+		#{name},
+		supportpereat = #{supportpereat},
+		calory = #{calory},
+		carbo =
+		#{carbo},
+		protein = #{protein},
+		fat = #{fat},
+		sugar = #{sugar},
+		natrium =
+		#{natrium},
+		chole = #{chole},
+		fattyacid = #{fattyacid},
+		transfat =
+		#{transfat},
+		maker = #{maker},
+		img = #{img},
+		allergy = #{allergy},
+		where
+		code = #{code}
+	</update>
+
+	<insert id="foodInsert" parameterType="FoodDTO">
+		insert into food values(
+		#{code}, #{name}, #{supportpereat}, #{calory}, #{carbo}, #{protein},
+		#{fat}, #{sugar}, #{natrium}, #{chole},
+		#{fattyacid}, #{transfat}, #{maker}, #{material}, #{img}, #{allergy},#{searchCount}
+		)
+
+	</insert>
+
+	<delete id="foodDelete" parameterType="int">
+		delete from food where
+		code
+		= #{code}
+	</delete>
+
+	<select id="foodSelectOne" parameterType="int"
+		resultType="FoodDTO">
+		select * from food where code = #{code }
+	</select>
+
+	<select id="foodSelectList" resultType="FoodDTO">
+		select * from food
+	</select>
+
+	<select id="searchByMaterialToFirst" resultType="FoodDTO"
+		parameterType="string">
+		select * from food where material like CONCAT(#{keyword},'%')
+	</select>
+
+	<select id="searchByMakeToFirst" resultType="FoodDTO"
+		parameterType="string">
+		select * from food where maker like CONCAT(#{keyword},'%')
+	</select>
+
+	<select id="searchByNameToFirst" resultType="FoodDTO"
+		parameterType="string">
+		select * from food where name like CONCAT(#{keyword},'%')
+	</select>
+
+	<update id="searchCountUp" parameterType="int">
+		update food set
+		searchCount = searchCount + 1 where code= #{code}
+
+	</update>
+
+	<select id="proSearchByName" resultType="FoodDTO"
+		parameterType="string">
+		select * from food where name like CONCAT('%',#{keyword},'%')
+	</select>
+
+	<select id="proSearchByMake" resultType="FoodDTO"
+		parameterType="string">
+		select * from food where maker like CONCAT('%',#{keyword},'%')
+	</select>
+	<select id="proSearchByMaterial" resultType="FoodDTO"
+		parameterType="string">
+		select * from food where material like CONCAT('%',#{keyword},'%')
+	</select>
+
+</mapper>

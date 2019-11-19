@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Notice객체의 mybatis 설정 문제 -->
+<mapper namespace="com.notice">
+
+	<insert id="notInsert" parameterType="NoticeDTO">
+		insert into notice values(
+		#{nid}, #{ntitle}, #{ncontent},#{ncount}
+		)
+	</insert>
+	<update id="notUpdate" parameterType="NoticeDTO">
+		update notice set
+		ntitle =
+		#{ntitle}, ncontent=#{ncontent},ncount=#{ncount} where nid = #{nid}
+	</update>
+
+	<select id="notInfo" parameterType="string"
+		resultType="NoticeDTO">
+		select * from notice where nid = #{nid }
+	</select>
+
+	<select id="notList" resultType="NoticeDTO">
+		select * from notice
+	</select>
+
+	<select id="notFind" parameterType="NoticeDTO"
+		resultType="NoticeDTO">
+		select * from notice where nid=#{nid }
+	</select>
+
+	<delete id="notDelete" parameterType="int">
+		delete from notice where
+		nid = #{nid}
+	</delete>
+
+	<update id="countUp" parameterType="int">
+		update notice set
+		ncount=ncount+1 where nid = #{nid}
+	</update>
+</mapper>
