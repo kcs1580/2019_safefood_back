@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  <!-- DTO를 앞으로 MemDTO, ProDTO로 Alias한다. -->
+  
+<configuration>
+
+ 	<typeAliases>
+		<typeAlias type="com.safefood.dto.allergyDTO" alias="allergyDTO" />
+		<typeAlias type="com.safefood.dto.BoardDTO" alias="BoardDTO" />
+		<typeAlias type="com.safefood.dto.FoodDTO" alias="FoodDTO" />
+		<typeAlias type="com.safefood.dto.MemDTO" alias="MemDTO" />
+		
+		<typeAlias type="com.safefood.dto.NoticeDTO" alias="NoticeDTO" />
+		<typeAlias type="com.safefood.dto.ProductDTO" alias="ProductDTO" />
+		<typeAlias type="com.safefood.dto.TakeinFoodDTO" alias="TakeInDTO" />
+		<typeAlias type="com.safefood.dto.TakeinFoodDTO" alias="TakeinFoodDTO" />
+		<typeAlias type="com.safefood.dto.TakeinSumDTO" alias="TakeinSumDTO" />
+	</typeAliases>
+	
+ 	<mappers>
+		<mapper resource="mybatis/memberSQLMapper.xml" />
+		<mapper resource="mybatis/noticeSQLMapper.xml" />
+		<mapper resource="mybatis/foodSQLMapper.xml" />
+		<mapper resource="mybatis/boardSQLMapper.xml" />
+ 	<mapper resource="mybatis/takeinSQLMapper.xml" /> 	
+ 
+	</mappers>  
+
+</configuration>
