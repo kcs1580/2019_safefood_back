@@ -110,7 +110,9 @@ public class RestBoardController {
 			board = bSer.infoBoard(bid);
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", bid + "조회 성공");
-			map.put("resvalue", bid);
+			map.put("resvalue", board);
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+
 		}catch (RuntimeException e) {
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", "조회실패");
