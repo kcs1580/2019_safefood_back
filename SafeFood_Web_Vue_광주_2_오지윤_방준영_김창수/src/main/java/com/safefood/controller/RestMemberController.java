@@ -64,16 +64,18 @@ public class RestMemberController {
 	@ApiOperation(value = "회원가입")
 	public ResponseEntity<Map<String, Object>> signUpMem(@RequestBody MemDTO dto, HttpServletRequest req) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
-		System.out.println("회원가입가능????");
+	//	System.out.println("회원가입가능????");
 		System.out.println(dto.toString());
 		try {
 			String[] allergyArr = dto.getAllergyArr();
 			String allergy = "";
-			System.out.println("1");
+			//System.out.println(allergyArr.length);
+			if(allergyArr.length!=0) {
 			for (String str : allergyArr)
 				allergy += str + " ";
+			}
 			System.out.println("2");
-			user.signUpMem(dto.getId(), dto.getPassword(), dto.getMname(), dto.getAddr(), dto.getTel(), "",
+			user.signUpMem(dto.getId(), dto.getPassword(), dto.getMname(), dto.getAddr(), dto.getTel(), allergy,
 					"", "");
 			Map msg = new HashMap();
 			msg.put("resMSG", dto.getId() + "입력 성공");
