@@ -62,6 +62,9 @@ public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 	public boolean boardDelete(String user_id, int bid) {
 		int res = session.delete("com.board.boardDelete", bid+"");
 		if(res>=1) {
+			session.update("com.board.boardIndexRefresh1");
+			session.update("com.board.boardIndexRefresh2");
+			session.update("com.board.boardIndexRefresh3");
 			return true;
 		}
 		return false;

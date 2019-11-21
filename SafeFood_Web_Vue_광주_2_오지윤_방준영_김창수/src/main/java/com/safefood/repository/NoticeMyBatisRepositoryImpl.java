@@ -17,6 +17,7 @@ public class NoticeMyBatisRepositoryImpl implements INoticeRepository {
 
 	@Override
 	public boolean noticeInsert(NoticeDTO n) {
+		System.out.println(n.toString() + "데이터보내기전");
 		try {
 			session.insert("com.notice.notInsert", n);
 			return true;
@@ -40,8 +41,10 @@ public class NoticeMyBatisRepositoryImpl implements INoticeRepository {
 	@Override
 	public boolean noticeUpdate(NoticeDTO n) {
 		int res = session.update("com.notice.notUpdate", n);
-		if (res >= 1)
+		if (res >= 1) {
+			
 			return true;
+		}
 		return false;
 	}
 
@@ -49,6 +52,9 @@ public class NoticeMyBatisRepositoryImpl implements INoticeRepository {
 	public boolean noticeDelete(int nid) {
 		int res = session.delete("com.notice.notDelete", nid);
 		if(res>=1) {
+			session.update("com.notice.noticeIndexRefresh1");
+			session.update("com.notice.noticeIndexRefresh2");
+			session.update("com.notice.noticeIndexRefresh3");
 			return true;
 		}
 		return false;
