@@ -146,10 +146,11 @@ public class RestNoticeController {
 
 	@PostMapping("/registernotice")
 	@ApiOperation(value = "Notice 등록 서비스")
-	private ResponseEntity<Map<String, Object>> registerNotice(@RequestBody BoardDTO dto) {
+	private ResponseEntity<Map<String, Object>> registerNotice(@RequestBody NoticeDTO dto) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
+		//System.out.println(dto.toString() +"asdf");
 		try {
-			boolean res = nSer.registerNotice(dto.getBtitle(), dto.getBcontent());
+			boolean res = nSer.registerNotice(dto.getNtitle(), dto.getNcontent());
 			Map<String, Object> msg = new HashMap();
 			msg.put("resCode", "입력 성공");
 			msg.put("resvalue", res);
@@ -191,13 +192,15 @@ public class RestNoticeController {
 			notice = nSer.infoNotice(nid);
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", nid + "조회 성공");
-			map.put("resvalue", nid);
+			map.put("resvalue", notice);
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}catch (RuntimeException e) {
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", "조회실패");
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	
 		}
+		System.out.println(notice.toString() + "출력해보자");
 		return resEntity;
 	}
 

@@ -27,7 +27,9 @@ public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 		m.setBtitle(btitle);
 		m.setBcontent(bcontent);
 		m.setBcount(0);
+		//System.out.println(">>>>>"+m.toString());
 		int res = session.insert("com.board.boardInsert", m);
+		//System.out.println(res);
 		if (res >= 1)
 			return true;
 		return false;

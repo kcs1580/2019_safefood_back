@@ -84,6 +84,8 @@ $(document).ready(function(){
 						<li><a href="searchallintake">섭취 상품 정보</a></li>
 						</c:if>
 						<li><a href="http://localhost:8080">질문 게시판</a></li>
+						<li><a href="/listboard">질문 게시판</a></li>
+
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">

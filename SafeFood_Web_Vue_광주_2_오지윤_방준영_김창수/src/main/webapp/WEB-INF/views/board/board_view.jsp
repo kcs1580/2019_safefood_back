@@ -9,15 +9,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-/* 	$('#updateBoard').on('click', function(){
-		$('#boardForm').attr('action', 'updateview');
-		$('#boardForm').submit();
-	});
-	
-	$('#deleteBoard').on('click', function(){
-		$('#boardForm').attr('action', 'deleteboard');
-		$('#boardForm').submit();
-	}); */
+
 })
 </script>
 </head>
@@ -30,7 +22,7 @@ $(document).ready(function(){
 			<div class="panel-heading">
 				<strong>${board.btitle }</strong>
 				<input type="hidden" name="user_id" value="${currentId }"/>
-				<input type="hidden" name="bid" value="${board.bid }" />
+				<input type="hidden" name="bid" value="${board.bid }"/>
 				<input type="hidden" name="btitle" value="${board.btitle }" />
 			</div>
 			<div class="panel-body">
