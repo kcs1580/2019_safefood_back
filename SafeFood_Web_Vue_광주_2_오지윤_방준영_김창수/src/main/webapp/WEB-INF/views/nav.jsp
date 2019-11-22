@@ -80,13 +80,13 @@ $(document).ready(function(){
 						
 						<li>
 						<a href="listfood">상품 정보</a></li>
-						<c:if test="${currentId != null }">
+						<%-- <c:if test="${currentId != null }">
 						<li><a href="searchallintake">섭취 상품 정보</a></li>
-						</c:if>
+						</c:if> --%>
 						<li><a href="http://localhost:8080">질문 게시판</a></li>
 					</ul>
 
-					<ul class="nav navbar-nav navbar-right">
+					<%-- <ul class="nav navbar-nav navbar-right">
 						<c:choose>
 							<c:when test="${currentId == null }">
 							<li><a class="btn btn-sm" href="signuppage"> <span
@@ -139,7 +139,7 @@ $(document).ready(function(){
 							</c:when>
 						</c:choose>
 						
-					</ul>
+					</ul> --%>
 
 				</div>
 				<!-- /.navbar-collapse -->
