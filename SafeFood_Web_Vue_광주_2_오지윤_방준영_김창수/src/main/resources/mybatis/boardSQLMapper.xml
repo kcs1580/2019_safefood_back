@@ -27,8 +27,19 @@
 		select * from board where bid=#{bid }
 	</select>
 
+	<update id="boardIndexRefresh1" >
+		ALTER TABLE board AUTO_INCREMENT=1;
+	</update>
+	<update id="boardIndexRefresh2" >
+		SET @COUNT = 0;
+	</update>
+	<update id="boardIndexRefresh3" >
+		UPDATE board SET bid = @COUNT:=@COUNT+1;
+	</update>
+
 	<delete id="boardDelete" parameterType="String">
-		delete from board where bid = #{bid}
+		delete from board where bid = #{bid};
+		
 	</delete>
 	
 	<update id="countUp" parameterType="int">

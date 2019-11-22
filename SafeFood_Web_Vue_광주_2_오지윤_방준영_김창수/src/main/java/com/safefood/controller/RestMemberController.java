@@ -90,9 +90,9 @@ public class RestMemberController {
 
 	}
 
-	@GetMapping("/memlist")
+	@GetMapping("/memlist/{id}")
 	@ApiOperation(value = "회원정보찾기",response = List.class)
-	public  @ResponseBody ResponseEntity<Map<String,Object>>  findmem(@PathVariable("id") String id) {
+	public  @ResponseBody ResponseEntity<Map<String,Object>> findmem(@PathVariable("id") String id) {
 //		String id = req.getParameter("id");
 //		MemDTO mem = user.infoMem(id);
 //		mv.addObject("mem", mem);
@@ -143,6 +143,7 @@ public class RestMemberController {
 	@ApiOperation(value = "id를 받아 멤버 수정 서비스")
 	public  ResponseEntity<Map<String, Object>> updateMem(@RequestBody MemDTO mem,HttpServletRequest req, ModelAndView mv) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
+		System.out.println(">>>>>>"+mem.getId());
 		try {
 		String[] allergyArr = req.getParameterValues("allergy");
 		String allergy = "";
