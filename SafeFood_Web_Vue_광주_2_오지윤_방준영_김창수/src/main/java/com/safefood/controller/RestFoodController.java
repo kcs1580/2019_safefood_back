@@ -87,12 +87,13 @@ public class RestFoodController {
 	public @ResponseBody ResponseEntity<Map<String, Object>> listfood() {
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		List<FoodDTO> list = null;
-
+		System.out.println("조회햇다");
 		try {
 			Map<String, Object> map = new HashMap();
 			list = ser.listFood();
 			map.put("resmsg", " 조회 성공");
 			map.put("list", list);
+			
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			Map<String, Object> map = new HashMap();
