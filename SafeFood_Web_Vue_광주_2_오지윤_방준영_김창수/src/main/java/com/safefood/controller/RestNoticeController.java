@@ -190,6 +190,7 @@ public class RestNoticeController {
 		NoticeDTO notice = null;
 		try {
 			notice = nSer.infoNotice(nid);
+			boolean res = nSer.countUp(nid);
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", nid + "조회 성공");
 			map.put("resvalue", notice);

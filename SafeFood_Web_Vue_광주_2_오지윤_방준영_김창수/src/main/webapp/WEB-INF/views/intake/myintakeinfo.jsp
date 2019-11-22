@@ -42,7 +42,6 @@
 			var myDoughnutChart = new Chart($("#myChart"), {
 				type : 'doughnut',
 				data : data
-			//						 		    options: options
 			});
 		
 		$('#selection').on('change', function(){
@@ -60,8 +59,7 @@
 		<canvas id="myChart" class="col-xs-12 col-sm-4 col-md-3"></canvas>
 			<div class="col-xs-12"
 				style="text-align: right; margin-bottom: 15px;">
-				<form action="searchintake" class="form-inline">
-					
+				<form action="searchintake" class="form-inline">					
 					<div class="form-group">
 					</div>
 					<div class="form-group">
