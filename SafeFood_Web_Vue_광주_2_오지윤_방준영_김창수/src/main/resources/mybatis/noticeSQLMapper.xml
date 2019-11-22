@@ -20,7 +20,15 @@
 		resultType="NoticeDTO">
 		select * from notice where nid = #{nid }
 	</select>
-
+	<update id="noticeIndexRefresh1">
+		ALTER TABLE notice AUTO_INCREMENT=1;
+	</update>
+	<update id="noticeIndexRefresh2">
+		SET @COUNT = 0;
+	</update>
+	<update id="noticeIndexRefresh3">
+		UPDATE notice SET nid = @COUNT:=@COUNT+1;
+	</update>
 	<select id="notList" resultType="NoticeDTO">
 		select * from notice
 	</select>

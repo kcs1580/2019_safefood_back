@@ -82,8 +82,14 @@ $(document).ready(function(){
 						<a href="listfood">상품 정보</a></li>
 						<%-- <c:if test="${currentId != null }">
 						<li><a href="searchallintake">섭취 상품 정보</a></li>
+<<<<<<< HEAD
 						</c:if> --%>
 						<li><a href="http://localhost:8080">질문 게시판</a></li>
+=======
+						</c:if>
+						<li><a href="/listboard">질문 게시판</a></li>
+
+>>>>>>> branch 'master' of https://lab.ssafy.com/developer.korean/safefood_web_vue.git
 					</ul>
 
 					<%-- <ul class="nav navbar-nav navbar-right">
