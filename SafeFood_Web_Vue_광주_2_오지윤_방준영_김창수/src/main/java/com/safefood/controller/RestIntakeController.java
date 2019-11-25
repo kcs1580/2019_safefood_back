@@ -148,7 +148,7 @@ public class RestIntakeController {
 	private ResponseEntity<Map<String, Object>> insertIntake(@RequestParam("id") String id,
 			@RequestParam("code") int code) {
 		// System.out.println(id+"추가됩니다"+code);
-
+System.out.println("작동");
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
 			if (id != null) {
@@ -157,9 +157,11 @@ public class RestIntakeController {
 				Map<String, Object> msg = new HashMap();
 				msg.put("resCode", "입력 성공");
 				msg.put("resvalue", res);
+				System.out.println("성공");
 				resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			}
 		} catch (Exception e) {
+			System.out.println("실패");
 			Map<String, Object> msg = new HashMap();
 			msg.put("resCode", "입력 실패");
 			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
