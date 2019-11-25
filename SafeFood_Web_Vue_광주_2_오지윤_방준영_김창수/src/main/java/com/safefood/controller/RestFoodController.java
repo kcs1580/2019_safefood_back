@@ -87,7 +87,7 @@ public class RestFoodController {
 	public @ResponseBody ResponseEntity<Map<String, Object>> listfood() {
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		List<FoodDTO> list = null;
-		System.out.println("조회햇다");
+		
 		try {
 			Map<String, Object> map = new HashMap();
 			list = ser.listFood();
@@ -395,19 +395,23 @@ public class RestFoodController {
 	public @ResponseBody ResponseEntity<Map<String, Object>> searchFoodByKeyword(
 			@PathVariable("selection") String selection, @PathVariable("keyword") String keyword) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
+		
 		List<FoodDTO> list = new ArrayList<FoodDTO>();
 		try {
 			if (selection.equals("name")) {
-				list = ser.searchByNameToFirst(keyword);
+				list = ser.searchFoodByName(keyword);
 			} else if (selection.equals("maker")) {
-				list = ser.searchByMakerToFirst(keyword);
+				list = ser.searchFoodByMake(keyword);
 			} else if (selection.equals("material")) {
-				list = ser.searchByMaterialToFirst(keyword);
+				list = ser.searchFoodByMaterial(keyword);
 			}
+			
 
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", " 조회 성공");
 			map.put("list", list);
+			for(int i=0;i<list.size();i++)
+			System.out.println(list.get(i).toString());
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 
 		} catch (RuntimeException e) {

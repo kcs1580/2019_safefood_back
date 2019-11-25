@@ -50,7 +50,7 @@ public class TakeInController {
 		List<TakeinFoodDTO> list = tSer.intakeSearch(id, keyword);
 		TakeinSumDTO sum = tSer.intakeSum(id);
 		// request.setAttribute("sum", sum);
-		// request.setAttribute("list", list);
+		// request.setAttributess("list", list);
 		mv.addObject("sum", sum);
 		mv.addObject("list", list);
 		mv.setViewName("intake/myintakeinfo");

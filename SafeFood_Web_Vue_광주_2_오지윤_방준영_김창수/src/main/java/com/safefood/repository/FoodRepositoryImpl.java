@@ -39,7 +39,7 @@ public class FoodRepositoryImpl implements IFoodRepository {
 	@Override
 	public List<FoodDTO> proSearchByName(String keyword) {
 		// TODO Auto-generated method stub
-		System.out.println("도도" + keyword);
+		
 		return session.selectList("com.food.proSearchByName", keyword);
 	}
 

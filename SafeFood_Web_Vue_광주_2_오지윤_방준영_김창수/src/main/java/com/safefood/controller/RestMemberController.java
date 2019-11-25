@@ -64,19 +64,14 @@ public class RestMemberController {
 	@ApiOperation(value = "회원가입")
 	public ResponseEntity<Map<String, Object>> signUpMem(@RequestBody MemDTO dto, HttpServletRequest req) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
-	//	System.out.println("회원가입가능????");
-		System.out.println(dto.toString());
 		try {
-			String[] allergyArr = dto.getAllergyArr();
+			String[] allergyArr = req.getParameterValues("allergy");
 			String allergy = "";
-			//System.out.println(allergyArr.length);
-			if(allergyArr.length!=0) {
 			for (String str : allergyArr)
 				allergy += str + " ";
-			}
-			System.out.println("2");
+			
 			user.signUpMem(dto.getId(), dto.getPassword(), dto.getMname(), dto.getAddr(), dto.getTel(), allergy,
-					"", "");
+					dto.getQuestion(), dto.getAnswer());
 			Map msg = new HashMap();
 			msg.put("resMSG", dto.getId() + "입력 성공");
 			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -92,7 +87,7 @@ public class RestMemberController {
 
 	@GetMapping("/memlist/{id}")
 	@ApiOperation(value = "회원정보찾기",response = List.class)
-	public  @ResponseBody ResponseEntity<Map<String,Object>> findmem(@PathVariable("id") String id) {
+	public  @ResponseBody ResponseEntity<Map<String,Object>>  findmem(@PathVariable("id") String id) {
 //		String id = req.getParameter("id");
 //		MemDTO mem = user.infoMem(id);
 //		mv.addObject("mem", mem);
@@ -143,7 +138,6 @@ public class RestMemberController {
 	@ApiOperation(value = "id를 받아 멤버 수정 서비스")
 	public  ResponseEntity<Map<String, Object>> updateMem(@RequestBody MemDTO mem,HttpServletRequest req, ModelAndView mv) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
-		System.out.println(">>>>>>"+mem.getId());
 		try {
 		String[] allergyArr = req.getParameterValues("allergy");
 		String allergy = "";
@@ -158,10 +152,8 @@ public class RestMemberController {
 			map.put("resmsg", "수정 실패");
 			resEntity = new ResponseEntity<Map<String, Object>> (map,HttpStatus.OK);
 		}		
-		return resEntity;
-		
+		return resEntity;	
 	}
-
 	@GetMapping("/logoutmem")
 	@ApiOperation(value = "로그아웃 서비스")
 	public ModelAndView logoutMem(HttpServletRequest req, ModelAndView mv) {
