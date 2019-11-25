@@ -73,7 +73,7 @@ public class RestMemberController {
 			
 			user.signUpMem(dto.getId(), dto.getPassword(), dto.getMname(), dto.getAddr(), dto.getTel(), allergy,
 					dto.getQuestion(), dto.getAnswer());
-			System.out.println(dto.toString());
+			//System.out.println(dto.toString());
 			Map msg = new HashMap();
 			msg.put("resMSG", dto.getId() + "입력 성공");
 			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);

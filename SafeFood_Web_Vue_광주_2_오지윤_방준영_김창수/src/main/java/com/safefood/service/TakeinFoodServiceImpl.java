@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.safefood.dto.TakeInDTO;
 import com.safefood.dto.TakeinFoodDTO;
+import com.safefood.dto.TakeinSearchDTO;
 import com.safefood.dto.TakeinSumDTO;
 import com.safefood.repository.ITakeinFoodRepository;
 
@@ -25,17 +26,15 @@ public class TakeinFoodServiceImpl implements ITakeinFoodService {
 		return repo.intakeList(id);
 	}
 
-
-
 	@Override
-	public TakeinFoodDTO intakeInfo(String id, int code) {
+	public TakeinFoodDTO intakeInfo(TakeInDTO t) {
 
-		return repo.intakeInfo(id, code);
+		return repo.intakeInfo(t);
 	}
 
 	@Override
-	public int intakeDelete(String id, int code) {
-		return repo.intakeDelete(id, code);
+	public int intakeDelete(TakeInDTO t) {
+		return repo.intakeDelete(t);
 	}
 
 	@Override
@@ -45,14 +44,14 @@ public class TakeinFoodServiceImpl implements ITakeinFoodService {
 	}
 
 	@Override
-	public List<TakeinFoodDTO> intakeSearch(String id, String keyword) {
+	public List<TakeinFoodDTO> intakeSearch(TakeinSearchDTO dto) {
 
-		return repo.intakeSearch(id, keyword);
+		return repo.intakeSearch(dto);
 	}
 
 	@Override
-	public int selectOne(int code, String id, int icount) {
-		return icount;
+	public int selectOne(TakeInDTO t) {
+		return t.getIcount();
 	}
 
 
@@ -61,7 +60,7 @@ public class TakeinFoodServiceImpl implements ITakeinFoodService {
 	public int intakeInsert(TakeInDTO dto) {
 		int cnt = repo.selectOne(dto);
 		
-		System.out.println("cnt===" + cnt);
+		
 		int res=0;
 		if(cnt!=0) {
 			res = repo.intakeUpdate(dto);

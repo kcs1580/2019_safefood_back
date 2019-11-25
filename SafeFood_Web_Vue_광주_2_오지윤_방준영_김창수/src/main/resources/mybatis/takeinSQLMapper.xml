@@ -22,7 +22,7 @@
 		select * from intake where code=#{code} and id=#{id}
 	</select>
 
-	<select id="intakeSearch" parameterType="string"
+	<select id="intakeSearch" parameterType="TakeinSearchDTO"
 		resultType="TakeinFoodDTO">
 		select f.*, i.id, i.idate, i.icount from food as f join
 		intake as i on (f.code = i.code) where i.id = #{id} and
@@ -69,5 +69,9 @@ select sum(f.calory*i.icount) as calory,
 	<update id="intakeupdate" parameterType="TakeInDTO" >
 		update intake set icount = icount+1 where code = #{code} and id = #{id} and idate = current_date()
 	</update>
+	
+	<delete id="intakedelete" parameterType="TakeInDTO" >
+		delete from intake where code = #{code} and id = #{id}
+	</delete>
 
 </mapper>

@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.safefood.dto.NoticeDTO;
 import com.safefood.dto.TakeInDTO;
 import com.safefood.dto.TakeinFoodDTO;
+import com.safefood.dto.TakeinSearchDTO;
 import com.safefood.dto.TakeinSumDTO;
 import com.safefood.service.INoticeService;
 import com.safefood.service.ITakeinFoodService;
@@ -53,14 +54,14 @@ public class RestIntakeController {
 
 	@GetMapping("/searchintake/{keyword}/{id}")
 	@ApiOperation(value = "섭취정보 검색 서비스")
-	private ResponseEntity<Map<String, Object>> searchintake( @PathVariable("keyword") String keyword, @PathVariable("id") String id)
+	private ResponseEntity<Map<String, Object>> searchintake( @RequestBody TakeinSearchDTO t)
 			 {
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {		
 		Map<String, Object> map = new HashMap();
-		List<TakeinFoodDTO> list = tSer.intakeSearch(id, keyword);
-		TakeinSumDTO sum = tSer.intakeSum(id);
-		map.put("resmsg", id + "조회 성공");
+		List<TakeinFoodDTO> list = tSer.intakeSearch(t);
+		TakeinSumDTO sum = tSer.intakeSum(t.getId());
+		map.put("resmsg", t.getId() + "조회 성공");
 		map.put("list", list);
 		}catch (Exception e) {
 			Map<String, Object> map = new HashMap();
@@ -71,21 +72,14 @@ public class RestIntakeController {
 		// request.getRequestDispatcher("myintakeinfo.jsp").forward(request);
 	}
 
-	@GetMapping("/searchallintake")
+	@GetMapping("/searchallintake/{id}")
 	@ApiOperation(value = "섭취정보 리스트 서비스", response = List.class)
 
-	private ResponseEntity<Map<String, Object>> selectallIntake(HttpServletRequest request) {
+	private ResponseEntity<Map<String, Object>> selectallIntake(@PathVariable("id") String id,HttpServletRequest request) {
 		// System.out.println("들아옴?");
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		List<TakeinFoodDTO> list = null;
-		try {
-		HttpSession session = request.getSession();
-		
-		/*********************************************************************************************
-		String id = (String) session.getAttribute("currentId"); // 정적으로 설정해주기 위해 잠시 주석 처리, JY 11.22
-		**********************************************************************************************/
-		String id = "ssafy@naver.com";
-		
+		try {				
 		list = tSer.intakeList(id);
 		TakeinSumDTO sum = tSer.intakeSum(id);
 		Map<String, Object> map = new HashMap();
@@ -104,13 +98,13 @@ public class RestIntakeController {
 	@GetMapping("/selectoneintake")
 	@ApiOperation(value = "섭취정보 선택 서비스")
 
-	private ResponseEntity<Map<String, Object>> selectOneIntake(@RequestBody TakeinFoodDTO dto) {
+	private ResponseEntity<Map<String, Object>> selectOneIntake(@RequestBody TakeInDTO dto) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
 		int code = dto.getCode();
 		String id = dto.getId();
 		// int code = Integer.parseInt(request.getParameter("code"));
-		TakeinFoodDTO food = tSer.intakeInfo(id, code);
+		TakeinFoodDTO food = tSer.intakeInfo(dto);
 		Map<String, Object> map = new HashMap();
 		map.put("resmsg", code + "조회 성공");
 		map.put("resvalue", " ");
@@ -125,17 +119,23 @@ public class RestIntakeController {
 
 	@DeleteMapping("/deleteintake")
 	@ApiOperation(value = "섭취정보 삭제 서비스")
-	private ResponseEntity<Map<String, Object>> deleteIntake(@PathVariable("code") int code, @PathVariable("id") String id) {
+	private ResponseEntity<Map<String, Object>> deleteIntake(@RequestBody TakeInDTO dto) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
 			
-			int res = tSer.intakeDelete(id, code);
+			String id = dto.getId();
+			int code = dto.getCode();
+			System.out.println(id+" "+code);
+			int res = tSer.intakeDelete(dto);
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", code + "제거 성공");
 			map.put("resvalue", res);
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			Map<String, Object> map = new HashMap();
+			String id = dto.getId();
+			int code = dto.getCode();
+			System.out.println(id+" "+code);
 			map.put("resmsg", "제거 실패");
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
@@ -144,15 +144,14 @@ public class RestIntakeController {
 
 	@GetMapping("/insertintake/{id}/{code}")
 	@ApiOperation(value = "섭취정보 등록 서비스")
-	private ResponseEntity<Map<String, Object>> insertIntake(@PathVariable("id") String id,
-			@PathVariable("code") int code) {
+	private ResponseEntity<Map<String, Object>> insertIntake(@RequestBody TakeInDTO dto) {
 		// System.out.println(id+"추가됩니다"+code);
-		System.out.println("테스트 " + id + " code" + code);
+		//System.out.println("테스트 " + id + " code" + code);
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
-			if (id != null) {
+			if (dto.getId() != null) {
 				int icount = 1;
-				int res = tSer.intakeInsert(new TakeInDTO(code, id, icount));
+				int res = tSer.intakeInsert(dto);
 				Map<String, Object> msg = new HashMap();
 				msg.put("resCode", "입력 성공");
 				msg.put("resvalue", res);

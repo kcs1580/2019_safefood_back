@@ -42,9 +42,16 @@ public class TakeInDTO {
 		this.idate = idate;
 	}
 	public TakeInDTO(int code, String id, int icount) {
+		super();
 		this.code = code;
 		this.id = id;
 		this.icount = icount;	}
+	
+	public TakeInDTO(int code, String id) {
+		super();
+		this.code = code;
+		this.id = id;
+			}
 
 	
 }

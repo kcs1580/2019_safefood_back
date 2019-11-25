@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.safefood.dto.TakeInDTO;
 import com.safefood.dto.TakeinFoodDTO;
+import com.safefood.dto.TakeinSearchDTO;
 import com.safefood.dto.TakeinSumDTO;
 
 @Repository("TakeinFoodMyBatisRepositoryImpl")
@@ -30,15 +31,15 @@ public class TakeinFoodMyBatisRepositoryImpl implements ITakeinFoodRepository {
 	}
 
 	@Override
-	public TakeinFoodDTO intakeInfo(String id, int code) {
+	public TakeinFoodDTO intakeInfo(TakeInDTO t) {
 		// TODO Auto-generated method stub
-		return session.selectOne("com.takein.intakeInfo", id);
+		return session.selectOne("com.takein.intakeInfo", t.getId());
 	}
 
 	@Override
-	public int intakeDelete(String id, int code) {
+	public int intakeDelete(TakeInDTO t) {
 		// TODO Auto-generated method stub
-		return session.delete("com.takein.intakeDelete", id);
+		return session.delete("com.takein.intakeDelete", t);
 	}
 
 	@Override
@@ -48,9 +49,9 @@ public class TakeinFoodMyBatisRepositoryImpl implements ITakeinFoodRepository {
 	}
 
 	@Override
-	public List<TakeinFoodDTO> intakeSearch(String id, String keyword) {
+	public List<TakeinFoodDTO> intakeSearch(TakeinSearchDTO t) {
 		// TODO Auto-generated method stub
-		return session.selectList("com.takein.intakeSearch", id);
+		return session.selectList("com.takein.intakeSearch", t);
 	}
 
 	@Override
