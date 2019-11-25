@@ -380,7 +380,6 @@ public class RestFoodController {
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", " 조회 성공");
 			map.put("recommend", food);
-
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (RuntimeException e) {
 			Map<String, Object> map = new HashMap();

@@ -39,6 +39,46 @@ import com.safefood.service.NoticeServiceImpl;
 
 import io.swagger.annotations.ApiOperation;
 
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.safefood.dto.BoardDTO;
+import com.safefood.dto.NoticeDTO;
+import com.safefood.service.INoticeService;
+import com.safefood.service.NoticeServiceImpl;
+
+import io.swagger.annotations.ApiOperation;
+
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
 @RequestMapping("/api")
@@ -148,7 +188,7 @@ public class RestNoticeController {
 	@ApiOperation(value = "Notice 등록 서비스")
 	private ResponseEntity<Map<String, Object>> registerNotice(@RequestBody NoticeDTO dto) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
-		//System.out.println(dto.toString() +"asdf");
+		System.out.println(dto.toString() + "Adasdasd");
 		try {
 			boolean res = nSer.registerNotice(dto.getNtitle(), dto.getNcontent());
 			Map<String, Object> msg = new HashMap();
@@ -190,6 +230,7 @@ public class RestNoticeController {
 		NoticeDTO notice = null;
 		try {
 			notice = nSer.infoNotice(nid);
+			boolean res = nSer.countUp(nid);
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", nid + "조회 성공");
 			map.put("resvalue", notice);

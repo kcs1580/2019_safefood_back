@@ -111,6 +111,7 @@ public class RestBoardController {
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		BoardDTO board = null;
 		try {
+			boolean res = bSer.countUp(bid);
 			board = bSer.infoBoard(bid);
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", bid + "조회 성공");

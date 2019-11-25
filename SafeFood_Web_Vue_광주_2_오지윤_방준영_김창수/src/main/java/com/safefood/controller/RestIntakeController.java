@@ -80,12 +80,18 @@ public class RestIntakeController {
 		List<TakeinFoodDTO> list = null;
 		try {
 		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("currentId");
+		
+		/*********************************************************************************************
+		String id = (String) session.getAttribute("currentId"); // 정적으로 설정해주기 위해 잠시 주석 처리, JY 11.22
+		**********************************************************************************************/
+		String id = "ssafy@naver.com";
+		
 		list = tSer.intakeList(id);
 		TakeinSumDTO sum = tSer.intakeSum(id);
 		Map<String, Object> map = new HashMap();
 		map.put("resmsg", "조회 성공");
-		map.put("resvalue", list);
+		map.put("list", list);
+		map.put("sum", sum);
 		resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}catch (Exception e) {
 			Map<String, Object> map = new HashMap();
