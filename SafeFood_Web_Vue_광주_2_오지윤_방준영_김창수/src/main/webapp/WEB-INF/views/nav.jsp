@@ -73,7 +73,7 @@
 									<li><a href="listfood">상품 정보</a></li>
 									<li><a href="#">상품 입력</a></li>
 									<li><a href="http://localhost:8080">질문 게시판</a></li>
-								
+
 								</ul>
 							</div></li>
 
