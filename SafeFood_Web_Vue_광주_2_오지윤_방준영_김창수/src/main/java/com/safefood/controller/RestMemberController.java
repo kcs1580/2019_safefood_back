@@ -85,7 +85,7 @@ public class RestMemberController {
 
 	}
 
-	@GetMapping("/memlist")
+	@GetMapping("/memlist/{id}")
 	@ApiOperation(value = "회원정보찾기",response = List.class)
 	public  @ResponseBody ResponseEntity<Map<String,Object>>  findmem(@PathVariable("id") String id) {
 //		String id = req.getParameter("id");
