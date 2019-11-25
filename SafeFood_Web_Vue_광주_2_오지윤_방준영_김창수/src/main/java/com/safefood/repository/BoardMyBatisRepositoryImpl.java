@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.safefood.dto.BoardDTO;
 
+
 @Repository("BoardMyBatisRepositoryImpl")
 public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 
