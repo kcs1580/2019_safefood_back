@@ -18,8 +18,8 @@
 	</insert>
 
 
-	<select id="intakeSelectOne" parameterType="int" resultType="TakeInDTO">
-		select * from intake where code=#{code}
+	<select id="intakeSelectOne" parameterType="TakeInDTO" resultType="TakeInDTO">
+		select * from intake where code=#{code} and id=#{id}
 	</select>
 
 	<select id="intakeSearch" parameterType="string"

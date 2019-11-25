@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -143,12 +144,12 @@ public class RestIntakeController {
 		return resEntity;
 	}
 
-	@PostMapping("/insertintake")
+	@GetMapping("/insertintake/{id}/{code}")
 	@ApiOperation(value = "섭취정보 등록 서비스")
-	private ResponseEntity<Map<String, Object>> insertIntake(@RequestParam("id") String id,
-			@RequestParam("code") int code) {
+	private ResponseEntity<Map<String, Object>> insertIntake(@PathVariable("id") String id,
+			@PathVariable("code") int code) {
 		// System.out.println(id+"추가됩니다"+code);
-
+		System.out.println("테스트 " + id + " code" + code);
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
 			if (id != null) {

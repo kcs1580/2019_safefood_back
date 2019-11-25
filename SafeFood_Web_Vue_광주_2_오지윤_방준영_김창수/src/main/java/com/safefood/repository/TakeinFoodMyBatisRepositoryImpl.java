@@ -54,8 +54,8 @@ public class TakeinFoodMyBatisRepositoryImpl implements ITakeinFoodRepository {
 	}
 
 	@Override
-	public int selectOne(int code, String id, int icount) {
-		TakeinFoodDTO m = session.selectOne("com.takein.intakeSelectOne", code);
+	public int selectOne(TakeInDTO t) {
+		TakeinFoodDTO m = session.selectOne("com.takein.intakeSelectOne", t);
 		if (m == null) {
 			return 0;
 		} else {
