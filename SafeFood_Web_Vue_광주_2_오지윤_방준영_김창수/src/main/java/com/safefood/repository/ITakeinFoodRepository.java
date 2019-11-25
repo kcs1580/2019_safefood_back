@@ -15,7 +15,7 @@ public interface ITakeinFoodRepository {
 	public TakeinSumDTO intakeSum(String id);
 	public List<TakeinFoodDTO> intakeSearch(String id, String keyword);
 	public int intakeInsert(TakeInDTO t);
-	public int selectOne(int code, String id, int icount);
+	public int selectOne(TakeInDTO t);
 	public int intakeUpdate(TakeInDTO t);
 }
 

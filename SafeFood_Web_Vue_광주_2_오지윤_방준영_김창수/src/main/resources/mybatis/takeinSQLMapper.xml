@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- Member객체의 mybatis 설정 문제 -->
+<!-- Member객체의 mybatis d설정 문제 -->
 <mapper namespace="com.takein">
 
 
@@ -18,8 +18,8 @@
 	</insert>
 
 
-	<select id="intakeSelectOne" parameterType="int" resultType="TakeInDTO">
-		select * from intake where code=#{code}
+	<select id="intakeSelectOne" parameterType="TakeInDTO" resultType="TakeInDTO">
+		select * from intake where code=#{code} and id=#{id}
 	</select>
 
 	<select id="intakeSearch" parameterType="string"

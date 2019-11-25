@@ -45,7 +45,9 @@ public class BoardServiceImpl implements IBoardService {
 	@Override
 	public boolean registerBoard(String user_id, String btitle, String bcontent) {
 		int count = dao.boardList().size();
+		System.out.println("3");
 		boolean res = dao.boardInsert((count+1)+"", user_id, btitle, bcontent);
+		System.out.println("4");
 		return res;
 	}
 

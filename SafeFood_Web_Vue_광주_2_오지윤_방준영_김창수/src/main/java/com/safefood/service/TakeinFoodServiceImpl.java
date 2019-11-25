@@ -59,14 +59,18 @@ public class TakeinFoodServiceImpl implements ITakeinFoodService {
 
 	@Override
 	public int intakeInsert(TakeInDTO dto) {
-		int cnt = repo.selectOne(dto.getCode(),dto.getId(),dto.getIcount());
+		int cnt = repo.selectOne(dto);
+		
+		System.out.println("cnt===" + cnt);
 		int res=0;
 		if(cnt!=0) {
 			res = repo.intakeUpdate(dto);
+			System.out.println("selectone 들어오나요1");
 		}else {
 			res = repo.intakeInsert(dto);
+			System.out.println("selectone 들어오나요2");
 		}
-		System.out.println("selectone 들어오나요");
+		
 		return res;
 		
 	}

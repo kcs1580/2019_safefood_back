@@ -1,3 +1,4 @@
+
 package com.safefood.controller;
 
 import java.io.IOException;
@@ -65,13 +66,14 @@ public class RestMemberController {
 	public ResponseEntity<Map<String, Object>> signUpMem(@RequestBody MemDTO dto, HttpServletRequest req) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
-			String[] allergyArr = req.getParameterValues("allergy");
+			String[] allergyArr = dto.getAllergyArr();
 			String allergy = "";
 			for (String str : allergyArr)
 				allergy += str + " ";
 			
 			user.signUpMem(dto.getId(), dto.getPassword(), dto.getMname(), dto.getAddr(), dto.getTel(), allergy,
 					dto.getQuestion(), dto.getAnswer());
+			System.out.println(dto.toString());
 			Map msg = new HashMap();
 			msg.put("resMSG", dto.getId() + "입력 성공");
 			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);

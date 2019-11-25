@@ -66,10 +66,13 @@ public class RestBoardController {
 
 	@PostMapping("/registerboard")
 	@ApiOperation(value = "board 등록 서비스")
-	private ResponseEntity<Map<String, Object>> registerNotice(@RequestBody BoardDTO dto) {
+	private ResponseEntity<Map<String, Object>> registerBoard(@RequestBody BoardDTO dto) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
+		System.out.println(dto.toString());
 		try {
+			System.out.println("1");
 			boolean res = bSer.registerBoard(dto.getUser_id(), dto.getBtitle(), dto.getBcontent());
+			System.out.println("2");
 			Map<String, Object> msg = new HashMap();
 			msg.put("resCode", "입력 성공");
 			msg.put("resvalue", res);
@@ -127,6 +130,7 @@ public class RestBoardController {
 	@ApiOperation(value = "Board 업데이트 서비스")
 	private ResponseEntity<Map<String, Object>> updateNotice(@RequestBody BoardDTO dto) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
+		System.out.println(dto.toString());
 		try {
 			boolean res = bSer.updateBoard(dto.getUser_id(), dto.getBid(), dto.getBtitle(), dto.getBcontent());
 			Map<String, Object> map = new HashMap();
