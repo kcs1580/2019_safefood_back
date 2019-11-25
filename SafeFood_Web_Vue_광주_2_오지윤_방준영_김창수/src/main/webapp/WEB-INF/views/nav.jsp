@@ -80,72 +80,13 @@ $(document).ready(function(){
 						
 						<li>
 						<a href="listfood">상품 정보</a></li>
-						<%-- <c:if test="${currentId != null }">
-						<li><a href="searchallintake">섭취 상품 정보</a></li>
-<<<<<<< HEAD
-						</c:if> --%>
+
 						<li><a href="http://localhost:8080">질문 게시판</a></li>
-=======
-						</c:if>
 						<li><a href="/listboard">질문 게시판</a></li>
 
->>>>>>> branch 'master' of https://lab.ssafy.com/developer.korean/safefood_web_vue.git
 					</ul>
 
-					<%-- <ul class="nav navbar-nav navbar-right">
-						<c:choose>
-							<c:when test="${currentId == null }">
-							<li><a class="btn btn-sm" href="signuppage"> <span
-								class="glyphicon glyphicon-user" aria-hidden="true"></span> <span>&nbsp;Sign
-									Up</span>
-						</a></li>
-						<li>
-							<ul class="nav navbar-nav pull-right">
-								<li class="dropdown" id="menuLogin"><a
-									class="btn btn-sm dropdown-toggle" href="#"
-									data-toggle="dropdown" id="navLogin"> <span
-										class="glyphicon glyphicon-lock" aria-hidden="true"></span> <span>&nbsp;Login</span>
-								</a>
-									<div class="dropdown-menu" style="padding: 17px;">
-										<form action="login" method="post">
-											<input type ="hidden" name="action" value="login" />
-											<div class="form-group">
-												<label for="id">아이디</label> <input type="email" name="id"
-													class="form-control" id="id" placeholder="Email">
-											</div>
-											<div class="form-group">
-												<label for="pw">패스워드</label> <input type="password" name="password"
-													class="form-control" id="password" placeholder="Password">
-											</div>
-											<div class="form-group">
-												<button type="submit" class="btn btn-block btn-primary">로그인</button>
-											</div>
-										</form>
-										<a href="./findPassword.jsp" class="btn btn-block btn-warning">비밀번호 찾기</a> 
-											<a href="./updatepersonalinfo.jsp"
-											class="btn btn-block btn-info">회원정보 수정 </a> <a
-											href= "memupdate"class="btn btn-block btn-danger">회원정보
-											삭제 </a>
-									</div></li>
-							</ul>
-						</li>
-							</c:when>
-							<c:when test="${currentId != null }">
-							<li>
-								<a id="modalbtn" class="btn btn-sm"> <span
-								class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> <span>&nbsp;오늘 뭐먹지?</span>
-								</a>
-							</li>
-							<li><a class="btn btn-sm" href="memlist?id=${currentId }"> <span
-								class="glyphicon glyphicon-user" aria-hidden="true"></span> <span>&nbsp;ID : ${currentId }</span>
-						</a></li>
-							<li><a class="btn btn-sm" href="logoutmem"> <span
-								class="glyphicon glyphicon-off" aria-hidden="true"></span> <span>&nbsp;Log Out</span>
-						</a></li>
-							</c:when>
-						</c:choose>
-						
-					</ul> --%>
+				
 
 				</div>
 				<!-- /.navbar-collapse -->
