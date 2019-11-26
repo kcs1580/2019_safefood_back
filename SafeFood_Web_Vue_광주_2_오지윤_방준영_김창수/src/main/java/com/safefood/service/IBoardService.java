@@ -21,7 +21,7 @@ public interface IBoardService {
 
 	public boolean countUp(int bid);
 	
-	public boolean registerComment(int bid, String ccontent, String user_id);
+	public boolean registerComment(int cnum,int bid,  String ccontent, String user_id);
 	
 	public List<CommentDTO> commentList(int bid);
 	

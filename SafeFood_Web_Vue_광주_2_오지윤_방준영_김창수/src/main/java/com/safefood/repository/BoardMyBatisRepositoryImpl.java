@@ -95,7 +95,7 @@ public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 		m.setBid(bid);
 		m.setUser_id(user_id);		
 		m.setCcontent(ccontent);		
-		
+		System.out.println(m.toString());
 		int res = session.insert("com.board.commentInsert", m);
 		if (res >= 1)
 			return true;
@@ -113,13 +113,8 @@ public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 	@Override
 	public boolean commentDelete(int cnum) {
 		int res = session.delete("com.board.commentList", cnum);
-	if(res>=1) {
-		session.update("com.board.commentIndexRefresh1");
-		session.update("com.board.commentIndexRefresh2");
-		session.update("com.board.commentIndexRefresh3");
-		return true;
-	}
-	return false;
+	
+	return true;
 	}
 
 }

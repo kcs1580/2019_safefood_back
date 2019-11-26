@@ -63,11 +63,10 @@ public class BoardServiceImpl implements IBoardService {
 	}
 
 	@Override
-	public boolean registerComment(int bid, String ccontent, String user_id) {
+	public boolean registerComment(int cnum, int bid, String ccontent, String user_id) {
 		// TODO Auto-generated method stub
-		int count = dao.boardList().size();	
-	
-		boolean res = dao.registerComment((count+1), bid, ccontent, user_id);
+			
+		boolean res = dao.registerComment(0, bid, ccontent, user_id);
 		return res;
 	}
 

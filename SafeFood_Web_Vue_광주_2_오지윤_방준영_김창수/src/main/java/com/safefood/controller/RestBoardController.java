@@ -230,10 +230,10 @@ public class RestBoardController {
 	@ApiOperation(value = "Comment 등록 서비스")
 	private ResponseEntity<Map<String, Object>> registerComment(@RequestBody CommentDTO dto) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
-		System.out.println(dto.toString());
+		
 		try {
 			
-			boolean res = bSer.registerComment(dto.getBid(),dto.getCcontent() , dto.getUser_id());
+			boolean res = bSer.registerComment(0,dto.getBid(),dto.getCcontent() , dto.getUser_id());
 			
 			Map<String, Object> msg = new HashMap();
 			msg.put("resCode", "입력 성공");
