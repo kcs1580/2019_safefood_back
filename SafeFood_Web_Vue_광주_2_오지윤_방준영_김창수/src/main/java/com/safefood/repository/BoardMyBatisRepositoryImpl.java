@@ -112,7 +112,7 @@ public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 
 	@Override
 	public boolean commentDelete(int cnum) {
-		int res = session.delete("com.board.commentList", cnum);
+		int res = session.delete("com.board.commentDelete", cnum);
 	
 	return true;
 	}

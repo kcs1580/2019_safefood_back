@@ -212,6 +212,7 @@ public class RestBoardController {
 	@ApiOperation(value = "Comment 제거 서비스")
 	private ResponseEntity<Map<String, Object>> deleteComment(@PathVariable("cnum") int cnum) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
+		System.out.println(cnum);
 		try {
 			boolean res = bSer.commentDelete(cnum);
 			Map<String, Object> map = new HashMap();
@@ -236,7 +237,7 @@ public class RestBoardController {
 			boolean res = bSer.registerComment(0,dto.getBid(),dto.getCcontent() , dto.getUser_id());
 			
 			Map<String, Object> msg = new HashMap();
-			msg.put("resCode", "입력 성공");
+			msg.put("resCode", "succ");
 			msg.put("resvalue", res);
 			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		} catch (RuntimeException e) {
