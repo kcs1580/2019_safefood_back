@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.safefood.dto.BoardDTO;
+import com.safefood.dto.CommentDTO;
 
 
 @Repository("BoardMyBatisRepositoryImpl")
@@ -84,6 +85,41 @@ public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 			return true;
 		else
 			return false;
+	}
+
+	@Override
+	public boolean registerComment(int cnum, int bid, String ccontent, String user_id) {
+		// TODO Auto-generated method stub
+		CommentDTO m = new CommentDTO();
+		m.setCnum(cnum);
+		m.setBid(bid);
+		m.setUser_id(user_id);		
+		m.setCcontent(ccontent);		
+		
+		int res = session.insert("com.board.commentInsert", m);
+		if (res >= 1)
+			return true;
+		return false;
+		
+	}
+
+	@Override
+	public List<CommentDTO> commentList(int bid) {
+		// TODO Auto-generated method stub
+		List<CommentDTO> selectList = session.selectList("com.board.commentList",bid);
+		return selectList;
+	}
+
+	@Override
+	public boolean commentDelete(int cnum) {
+		int res = session.delete("com.board.commentList", cnum);
+	if(res>=1) {
+		session.update("com.board.commentIndexRefresh1");
+		session.update("com.board.commentIndexRefresh2");
+		session.update("com.board.commentIndexRefresh3");
+		return true;
+	}
+	return false;
 	}
 
 }

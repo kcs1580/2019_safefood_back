@@ -44,5 +44,22 @@
 	
 	<update id="countUp" parameterType="int">
 		update board set bcount=bcount+1 where bid = #{bid}
-	</update>
+	</update>	
+	
+	<select id="commentList" resultType="CommentDTO" parameterType = "int">
+		select * from comment where bid = #{bid}
+	</select>
+	
+	<insert id="commentInsert" parameterType="CommentDTO">
+		insert into comment values(
+		#{cnum}, #{bid}, #{ccontent}, #{user_id}
+		)
+	</insert>
+	
+	<delete id="commentDelete" parameterType="int">
+		delete from comment where cnum = #{cnum};
+		
+	</delete>
+	
+	
 </mapper>

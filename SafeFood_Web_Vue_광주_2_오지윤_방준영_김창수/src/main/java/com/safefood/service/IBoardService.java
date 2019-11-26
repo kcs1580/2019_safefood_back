@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.safefood.dto.BoardDTO;
+import com.safefood.dto.CommentDTO;
 
 public interface IBoardService {
 	public boolean deleteBoard(String user_id, int bid);
@@ -19,4 +20,10 @@ public interface IBoardService {
 	public List<BoardDTO> searchBoard(String keyword);
 
 	public boolean countUp(int bid);
+	
+	public boolean registerComment(int bid, String ccontent, String user_id);
+	
+	public List<CommentDTO> commentList(int bid);
+	
+	public boolean commentDelete(int cnum);
 }

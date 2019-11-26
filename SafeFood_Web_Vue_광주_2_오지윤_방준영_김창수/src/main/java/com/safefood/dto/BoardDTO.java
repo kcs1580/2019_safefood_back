@@ -9,7 +9,7 @@ public class BoardDTO {
 	public BoardDTO() {
 		super();
 	}
-	public BoardDTO(int bid, String btitle, String bcontent, int bcount, String user_id) {
+	public BoardDTO(int bid, String btitle, String bcontent, String bcomment, int bcount, String user_id) {
 		super();
 		this.bid = bid;
 		this.btitle = btitle;

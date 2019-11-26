@@ -19,6 +19,8 @@
 		<typeAlias type="com.safefood.dto.TakeinSumDTO" alias="TakeinSumDTO" />
 		<typeAlias type="com.safefood.dto.TakeinSearchDTO" alias="TakeinSearchDTO" />
 		
+		<typeAlias type="com.safefood.dto.CommentDTO" alias="CommentDTO" />
+		
 	</typeAliases>
 	
  	<mappers>

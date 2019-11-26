@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.safefood.dto.BoardDTO;
+import com.safefood.dto.CommentDTO;
 import com.safefood.dto.NoticeDTO;
 import com.safefood.service.IBoardService;
 import com.safefood.service.INoticeService;
@@ -185,5 +186,64 @@ public class RestBoardController {
 		}
 		return resEntity;
 	}
+	
+	@GetMapping("/listcomment/{bid}")
+	@ApiOperation(value = "Comment 리스트 서비스", response = List.class)
+	private ResponseEntity<Map<String, Object>> listComment(@PathVariable("bid") int bid) {
+		ResponseEntity<Map<String, Object>> resEntity = null;
+		List<CommentDTO> list = null;
+		try {
+			list = bSer.commentList(bid);
+			Map<String, Object> map = new HashMap();
+			map.put("resmsg", "조회 성공");
+			map.put("resvalue", list);
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		}catch(RuntimeException e){
+			Map<String, Object> map = new HashMap();
+			map.put("resmsg", "조회실패");
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 
+		}
+		return resEntity;
+	}
+	
+	
+	@DeleteMapping("/deletecomment/{cnum}")
+	@ApiOperation(value = "Comment 제거 서비스")
+	private ResponseEntity<Map<String, Object>> deleteComment(@PathVariable("cnum") int cnum) {
+		ResponseEntity<Map<String, Object>> resEntity = null;
+		try {
+			boolean res = bSer.commentDelete(cnum);
+			Map<String, Object> map = new HashMap();
+			map.put("resmsg", cnum + "제거 성공");
+			map.put("resvalue", res);
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			Map<String, Object> map = new HashMap();
+			map.put("resmsg", "제거 실패");
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		}
+		return resEntity;
+	}
+	
+	@PostMapping("/registercomment")
+	@ApiOperation(value = "Comment 등록 서비스")
+	private ResponseEntity<Map<String, Object>> registerComment(@RequestBody CommentDTO dto) {
+		ResponseEntity<Map<String, Object>> resEntity = null;
+		System.out.println(dto.toString());
+		try {
+			
+			boolean res = bSer.registerComment(dto.getBid(),dto.getCcontent() , dto.getUser_id());
+			
+			Map<String, Object> msg = new HashMap();
+			msg.put("resCode", "입력 성공");
+			msg.put("resvalue", res);
+			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+		} catch (RuntimeException e) {
+			Map<String, Object> msg = new HashMap();
+			msg.put("resCode", "입력 실패");
+			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+		}
+		return resEntity;
+	}
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.safefood.dto.BoardDTO;
+import com.safefood.dto.CommentDTO;
 import com.safefood.repository.IBoardRepository;
 
 @Service("BoardServiceImpl")
@@ -45,9 +46,7 @@ public class BoardServiceImpl implements IBoardService {
 	@Override
 	public boolean registerBoard(String user_id, String btitle, String bcontent) {
 		int count = dao.boardList().size();
-		System.out.println("3");
 		boolean res = dao.boardInsert((count+1)+"", user_id, btitle, bcontent);
-		System.out.println("4");
 		return res;
 	}
 
@@ -62,5 +61,30 @@ public class BoardServiceImpl implements IBoardService {
 		boolean res = dao.countUp(bid);
 		return res;
 	}
+
+	@Override
+	public boolean registerComment(int bid, String ccontent, String user_id) {
+		// TODO Auto-generated method stub
+		int count = dao.boardList().size();	
+	
+		boolean res = dao.registerComment((count+1), bid, ccontent, user_id);
+		return res;
+	}
+
+	@Override
+	public List<CommentDTO> commentList(int bid) {
+		// TODO Auto-generated method stub
+		List<CommentDTO> list = dao.commentList(bid);
+		return list;
+	}
+
+	@Override
+	public boolean commentDelete(int cnum) {
+		// TODO Auto-generated method stub
+		boolean res = dao.commentDelete(cnum);
+		return res;
+	}
+	
+	
 
 }
