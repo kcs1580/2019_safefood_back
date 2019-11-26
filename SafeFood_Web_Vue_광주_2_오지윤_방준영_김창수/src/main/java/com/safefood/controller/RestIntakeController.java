@@ -134,7 +134,7 @@ public class RestIntakeController {
 
 			int res = tSer.intakeDelete(new TakeInDTO(code, id));
 			Map<String, Object> map = new HashMap();
-			map.put("resmsg", code + "제거 성공");
+			map.put("resmsg", "succ");
 			map.put("resvalue", res);
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (Exception e) {
