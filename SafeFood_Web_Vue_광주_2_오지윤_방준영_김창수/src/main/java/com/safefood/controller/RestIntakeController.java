@@ -54,16 +54,22 @@ public class RestIntakeController {
 
 	@GetMapping("/searchintake/{keyword}/{id}")
 	@ApiOperation(value = "섭취정보 검색 서비스")
-	private ResponseEntity<Map<String, Object>> searchintake( @RequestBody TakeinSearchDTO t)
+	private ResponseEntity<Map<String, Object>> searchintake( @PathVariable("keyword") String keyword, @PathVariable("id") String id)
 			 {
+		System.out.println(keyword+" "+id);
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {		
+			
 		Map<String, Object> map = new HashMap();
-		List<TakeinFoodDTO> list = tSer.intakeSearch(t);
-		TakeinSumDTO sum = tSer.intakeSum(t.getId());
-		map.put("resmsg", t.getId() + "조회 성공");
+		List<TakeinFoodDTO> list = tSer.intakeSearch(new TakeinSearchDTO(id, keyword));
+		TakeinSumDTO sum = tSer.intakeSum(id);
+		for(int i=0; i<list.size();i++) {
+			System.out.println(list.get(i).toString());
+		}
+		map.put("resmsg", id + "조회 성공");
 		map.put("list", list);
 		}catch (Exception e) {
+			
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", "조회실패");
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -117,25 +123,20 @@ public class RestIntakeController {
 
 	}
 
-	@DeleteMapping("/deleteintake")
+	@DeleteMapping("/deleteintake/{id}/{code}")
 	@ApiOperation(value = "섭취정보 삭제 서비스")
-	private ResponseEntity<Map<String, Object>> deleteIntake(@RequestBody TakeInDTO dto) {
+	private ResponseEntity<Map<String, Object>> deleteIntake(@PathVariable("id") String id, @PathVariable("code") int code) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
-		try {
+		try {	
 			
-			String id = dto.getId();
-			int code = dto.getCode();
-			System.out.println(id+" "+code);
-			int res = tSer.intakeDelete(dto);
+			int res = tSer.intakeDelete(new TakeInDTO(code,id));
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", code + "제거 성공");
 			map.put("resvalue", res);
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} catch (Exception e) {
-			Map<String, Object> map = new HashMap();
-			String id = dto.getId();
-			int code = dto.getCode();
-			System.out.println(id+" "+code);
+			Map<String, Object> map = new HashMap();			
+			
 			map.put("resmsg", "제거 실패");
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
@@ -144,16 +145,15 @@ public class RestIntakeController {
 
 	@GetMapping("/insertintake/{id}/{code}")
 	@ApiOperation(value = "섭취정보 등록 서비스")
-	private ResponseEntity<Map<String, Object>> insertIntake(@RequestBody TakeInDTO dto) {
+	private ResponseEntity<Map<String, Object>> insertIntake(@PathVariable("id") String id, @PathVariable("code") int code ) {
 		// System.out.println(id+"추가됩니다"+code);
 		//System.out.println("테스트 " + id + " code" + code);
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
-			if (dto.getId() != null) {
-				int icount = 1;
-				int res = tSer.intakeInsert(dto);
+			if (id != null) {
 				Map<String, Object> msg = new HashMap();
-				msg.put("resCode", "입력 성공");
+				int icount = 1;
+				int res = tSer.intakeInsert(new TakeInDTO(code, id));
 				msg.put("resvalue", res);
 				resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			}

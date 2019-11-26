@@ -66,11 +66,11 @@ select sum(f.calory*i.icount) as calory,
 		#{id} and icount>0
 	</select>
 
-	<update id="intakeupdate" parameterType="TakeInDTO" >
+	<update id="intakeUpdate" parameterType="TakeInDTO" >
 		update intake set icount = icount+1 where code = #{code} and id = #{id} and idate = current_date()
 	</update>
 	
-	<delete id="intakedelete" parameterType="TakeInDTO" >
+	<delete id="intakeDelete" parameterType="TakeInDTO" >
 		delete from intake where code = #{code} and id = #{id}
 	</delete>
 

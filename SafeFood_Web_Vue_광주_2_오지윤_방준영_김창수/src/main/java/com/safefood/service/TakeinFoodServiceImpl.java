@@ -34,7 +34,9 @@ public class TakeinFoodServiceImpl implements ITakeinFoodService {
 
 	@Override
 	public int intakeDelete(TakeInDTO t) {
+		
 		return repo.intakeDelete(t);
+		
 	}
 
 	@Override
@@ -64,10 +66,10 @@ public class TakeinFoodServiceImpl implements ITakeinFoodService {
 		int res=0;
 		if(cnt!=0) {
 			res = repo.intakeUpdate(dto);
-			System.out.println("selectone 들어오나요1");
+			
 		}else {
 			res = repo.intakeInsert(dto);
-			System.out.println("selectone 들어오나요2");
+			
 		}
 		
 		return res;

@@ -67,7 +67,7 @@ public class TakeinFoodMyBatisRepositoryImpl implements ITakeinFoodRepository {
 
 	@Override
 	public int intakeUpdate(TakeInDTO t) {
-		return session.update("com.takein.intakeupdate", t);
+		return session.update("com.takein.intakeUpdate", t);
 	}
 
 }
