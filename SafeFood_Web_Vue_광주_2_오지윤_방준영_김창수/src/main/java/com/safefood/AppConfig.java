@@ -22,7 +22,7 @@ public class AppConfig {
 		return new DataSourceTransactionManager(ds);
 		
 	}
-	
+	   
 	
 //	  @Bean public DataSource dataSource() { 
 //		  BasicDataSource ds = new BasicDataSource(); ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
