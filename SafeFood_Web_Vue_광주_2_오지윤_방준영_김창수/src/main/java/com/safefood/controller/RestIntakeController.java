@@ -37,7 +37,7 @@ import com.safefood.service.ITakeinFoodService;
 
 import io.swagger.annotations.ApiOperation;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
-
+//test
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
 @RequestMapping("/api")
