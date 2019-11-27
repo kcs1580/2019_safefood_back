@@ -74,6 +74,7 @@ public class RestIntakeController {
 			List<TakeinFoodDTO> list = tSer.intakeSearch(new TakeinSearchDTO(id, keyword));
 			map.put("resmsg", id + "조회 성공");
 			map.put("list", list);
+			
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			
 		} catch (Exception e) {

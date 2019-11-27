@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.safefood.dto.BoardDTO;
+import com.safefood.dto.ChatDTO;
 import com.safefood.dto.CommentDTO;
 
 
@@ -45,7 +46,7 @@ public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 	@Override
 	public BoardDTO boardInfo(int bid) {
 		BoardDTO board = session.selectOne("com.board.boardInfo", bid+"");
-		System.out.println("여기서" + board.toString());
+		//System.out.println("여기서" + board.toString());
 		return board;
 	}
 
@@ -90,14 +91,15 @@ public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 	}
 
 	@Override
-	public boolean registerComment(int cnum, int bid, String ccontent, String user_id) {
+	public boolean registerComment(int cnum, int bid, String ccontent, String user_id,String user_name) {
 		// TODO Auto-generated method stub
 		CommentDTO m = new CommentDTO();
 		m.setCnum(cnum);
 		m.setBid(bid);
 		m.setUser_id(user_id);		
-		m.setCcontent(ccontent);		
-		System.out.println(m.toString());
+		m.setCcontent(ccontent);
+		m.setUser_name(user_name);
+		//System.out.println(m.toString());
 		int res = session.insert("com.board.commentInsert", m);
 		if (res >= 1)
 			return true;
@@ -117,6 +119,27 @@ public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 		int res = session.delete("com.board.commentDelete", cnum);
 	
 	return true;
+	}
+
+	@Override
+	public boolean registerChat(int cnum, String ccontent, String user_id, String user_name) {
+		// TODO Auto-generated method stub
+		CommentDTO m = new CommentDTO();
+		m.setCnum(cnum);
+		m.setUser_id(user_id);		
+		m.setCcontent(ccontent);
+		m.setUser_name(user_name);
+		//System.out.println(m.toString());
+		int res = session.insert("com.board.chatInsert", m);
+		if (res >= 1)
+			return true;
+		return false;
+	}
+
+	@Override
+	public List<ChatDTO> chatList() {
+		List<ChatDTO> selectList = session.selectList("com.board.chatList");
+		return selectList;
 	}
 
 }
