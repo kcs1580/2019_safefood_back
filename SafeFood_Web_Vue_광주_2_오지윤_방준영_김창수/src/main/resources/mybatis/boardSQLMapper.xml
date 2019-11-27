@@ -7,7 +7,7 @@
 
 	<insert id="boardInsert" parameterType="BoardDTO">
 		insert into board values(
-		#{bid}, #{user_id}, #{btitle}, #{bcontent},#{bcount}
+		#{bid}, #{user_id}, #{btitle}, #{bcontent},#{bcount}, #{user_name}
 		)
 	</insert>
 	<update id="boardUpdate" parameterType="BoardDTO">
