@@ -25,6 +25,7 @@
 <body>
 	<div class="container">
 		<jsp:include page="nav.jsp"></jsp:include>
+		
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="row productRow">
