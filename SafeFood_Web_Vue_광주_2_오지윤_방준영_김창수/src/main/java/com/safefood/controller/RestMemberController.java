@@ -47,7 +47,7 @@ public class RestMemberController {
 	public String signUpPage() {
 		return "/member/signUp";
 	}
- 
+
 	@GetMapping("#")
 	@ApiOperation(value = "비밀번호찾기")
 	private ModelAndView findPw(@RequestBody MemDTO mem, ModelAndView mv) throws ServletException, IOException {
@@ -65,13 +65,13 @@ public class RestMemberController {
 	@ApiOperation(value = "회원가입")
 	public ResponseEntity<Map<String, Object>> signUpMem(@RequestBody MemDTO dto, HttpServletRequest req) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
-		System.out.println(dto.toString());
+		System.out.println(dto.toString() + "Sign up");
 		try {
 			String[] allergyArr = dto.getAllergyArr();
 			String allergy = "";
 			for (String str : allergyArr)
 				allergy += str + " ";
-			
+
 			user.signUpMem(dto.getId(), dto.getPassword(), dto.getMname(), dto.getAddr(), dto.getTel(), allergy,
 					dto.getQuestion(), dto.getAnswer(), dto.getCalorie_goal());
 			Map msg = new HashMap();
@@ -88,21 +88,27 @@ public class RestMemberController {
 	}
 
 	@GetMapping("/memlist/{id}")
-	@ApiOperation(value = "회원정보찾기",response = List.class)
-	public  @ResponseBody ResponseEntity<Map<String,Object>>  findmem(@PathVariable("id") String id) {
+	@ApiOperation(value = "회원정보찾기", response = List.class)
+	public @ResponseBody ResponseEntity<Map<String, Object>> findmem(@PathVariable("id") String id) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
+
 		MemDTO mem = null;
 		try {
-			Map<String,Object> map = new HashMap();
-			mem  = user.infoMem(id);
-			map.put("resmsg", id+" 조회 성공");
+			Map<String, Object> map = new HashMap();
+			mem = user.infoMem(id);
+
+			// 쪼갠걸 다시 합치는 부분 처리 ㄱ ㄱ  ㄱ
+			String[] allergyArr = mem.getAllergy().split(" ");
+			mem.setAllergyArr(allergyArr);
+
+			map.put("resmsg", id + " 조회 성공");
 			map.put("resvalue", mem);
-			resEntity = new ResponseEntity<Map<String, Object>> (map,HttpStatus.OK);
-		}catch (Exception e) {
-			Map<String,Object> map = new HashMap();
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			Map<String, Object> map = new HashMap();
 			map.put("resmsg", "조회 실패");
 			map.put("resvalue", mem);
-			resEntity = new ResponseEntity<Map<String, Object>> (map,HttpStatus.OK);
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
 		System.out.println(mem.toString());
 		return resEntity;
@@ -133,24 +139,29 @@ public class RestMemberController {
 
 	@PutMapping("/memupdate")
 	@ApiOperation(value = "id를 받아 멤버 수정 서비스")
-	public  ResponseEntity<Map<String, Object>> updateMem(@RequestBody MemDTO mem,HttpServletRequest req, ModelAndView mv) {
+	public ResponseEntity<Map<String, Object>> updateMem(@RequestBody MemDTO mem, HttpServletRequest req,
+			ModelAndView mv) {
+		System.out.println(mem.toString() + "/memupdate 테스트용도다!");
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
-		String[] allergyArr = req.getParameterValues("allergy");
-		String allergy = "";
-		for (String str : allergyArr)
-			allergy += str + " ";
-		user.updateMem(mem.getId(),mem.getPassword(), mem.getMname(), mem.getAddr(), mem.getTel(), allergy, mem.getCalorie_goal());
-		Map<String,Object> map = new HashMap();
-		map.put("resmsg",mem.getId()+ "수정 성공");
-		resEntity = new ResponseEntity<Map<String, Object>> (map,HttpStatus.OK);
-		}catch(RuntimeException e) {
-			Map<String,Object> map = new HashMap();
+			String[] allergyArr = mem.getAllergyArr();
+			String allergy = "";
+			for (String str : allergyArr)
+				allergy += str + " ";
+			user.updateMem(mem.getId(), mem.getPassword(), mem.getMname(), mem.getAddr(), mem.getTel(), allergy,
+					mem.getCalorie_goal());
+			Map<String, Object> map = new HashMap();
+			map.put("resmsg", mem.getId() + "수정 성공");
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			
+			
+		} catch (RuntimeException e) {
+			Map<String, Object> map = new HashMap();
 			map.put("resmsg", "수정 실패");
-			resEntity = new ResponseEntity<Map<String, Object>> (map,HttpStatus.OK);
-		}		
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		}
 		return resEntity;
-		
+
 	}
 
 	@GetMapping("/logoutmem")

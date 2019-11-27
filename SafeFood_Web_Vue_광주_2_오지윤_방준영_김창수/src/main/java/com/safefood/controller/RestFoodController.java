@@ -195,14 +195,14 @@ public class RestFoodController {
 	@ApiOperation(value = "상품개수세기")
 	public @ResponseBody ResponseEntity<Map<String, Object>> countFood(HttpServletRequest request) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
-		System.out.println("countfood 왔니");
+		
 		try {
 			int count = ser.countFood();
 
 			if (count == 0) {
 				// 절대경로 처리
 				String path = request.getServletContext().getRealPath("/res");
-				System.out.println(path);
+				
 				String foodPath = "file:\\" + path + "\\FoodInfo.xml";
 				String nutPath = "file:\\" + path + "\\FoodNutritionInfo.xml";
 
@@ -252,7 +252,7 @@ public class RestFoodController {
 			map.put("resmsg", "조회 실패");
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
-		System.out.println(",,,,");
+	
 		return resEntity;
 
 	}
@@ -411,8 +411,7 @@ public class RestFoodController {
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", " 조회 성공");
 			map.put("list", list);
-			for(int i=0;i<list.size();i++)
-			System.out.println(list.get(i).toString());
+			
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 
 		} catch (RuntimeException e) {
