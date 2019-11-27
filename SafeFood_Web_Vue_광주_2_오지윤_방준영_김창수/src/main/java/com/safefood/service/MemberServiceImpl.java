@@ -30,13 +30,13 @@ public class MemberServiceImpl implements IMemberService {
 
 	@Override
 	public void signUpMem(String id, String password, String mname, String addr, String tel, String allergy,
-			String question, String answer) {
-		repo.memInsert(new MemDTO(id,password,mname,addr,tel,allergy,question,answer));
+			String question, String answer, int calorie_goal) {
+		repo.memInsert(new MemDTO(id,password,mname,addr,tel,allergy,question,answer, calorie_goal));
 	}
 
 	@Override
-	public void updateMem(String id, String password, String mname, String addr, String tel, String allergy) {
-		repo.memUpdate(new MemDTO(id,password,mname,addr,tel,allergy));
+	public void updateMem(String id, String password, String mname, String addr, String tel, String allergy, int calorie_goal) {
+		repo.memUpdate(new MemDTO(id,password,mname,addr,tel,allergy,calorie_goal));
 	}
 
 	@Override

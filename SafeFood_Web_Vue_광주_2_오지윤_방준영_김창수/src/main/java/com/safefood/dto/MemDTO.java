@@ -1,5 +1,7 @@
 package com.safefood.dto;
 
+import java.util.Arrays;
+
 public class MemDTO {
 	private String id;
 	private String password;
@@ -10,6 +12,38 @@ public class MemDTO {
 	private String question;
 	private String answer;
 	private String[] allergyArr;
+	private int calorie_goal;
+	
+	@Override
+	public String toString() {
+		return "MemDTO [id=" + id + ", password=" + password + ", mname=" + mname + ", addr=" + addr + ", tel=" + tel
+				+ ", allergy=" + allergy + ", question=" + question + ", answer=" + answer + ", allergyArr="
+				+ Arrays.toString(allergyArr) + ", calorie_goal=" + calorie_goal + "]";
+	}
+
+	public int getCalorie_goal() {
+		return calorie_goal;
+	}
+
+	public void setCalorie_goal(int calorie_goal) {
+		this.calorie_goal = calorie_goal;
+	}
+
+	public MemDTO(String id, String password, String mname, String addr, String tel, String allergy, String question,
+			String answer, String[] allergyArr, int calorie_goal) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.mname = mname;
+		this.addr = addr;
+		this.tel = tel;
+		this.allergy = allergy;
+		this.question = question;
+		this.answer = answer;
+		this.allergyArr = allergyArr;
+		this.calorie_goal = calorie_goal;
+	}
+
 	public String[] getAllergyArr() {
 		return allergyArr;
 	}
@@ -37,7 +71,7 @@ public class MemDTO {
 	}
 
 	public MemDTO(String id, String password, String mname, String addr, String tel, String allergy, String question,
-			String answer) {
+			String answer, int calorie_goal) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -47,9 +81,10 @@ public class MemDTO {
 		this.allergy = allergy;
 		this.question = question;
 		this.answer = answer;
+		this.calorie_goal = calorie_goal;
 	}
 
-	public MemDTO(String id, String password, String mname, String addr, String tel, String allergy) {
+	public MemDTO(String id, String password, String mname, String addr, String tel, String allergy, int calorie_goal) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -57,7 +92,9 @@ public class MemDTO {
 		this.addr = addr;
 		this.tel = tel;
 		this.allergy = allergy;
+		this.calorie_goal = calorie_goal;
 	}
+
 
 	public String getId() {
 		return id;
@@ -123,11 +160,7 @@ public class MemDTO {
 		this.answer = answer;
 	}
 
-	@Override
-	public String toString() {
-		return "MemVo [id=" + id + ", password=" + password + ", mname=" + mname + ", addr=" + addr + ", tel=" + tel
-				+ ", allergy=" + allergy + ", question=" + question + ", answer=" + answer + "]";
-	}
+	
 
 	
 
