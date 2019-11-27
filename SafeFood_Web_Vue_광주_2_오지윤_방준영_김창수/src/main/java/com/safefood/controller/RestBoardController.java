@@ -72,7 +72,7 @@ public class RestBoardController {
 		System.out.println(dto.toString());
 		try {
 			System.out.println("1");
-			boolean res = bSer.registerBoard(dto.getUser_id(), dto.getBtitle(), dto.getBcontent());
+			boolean res = bSer.registerBoard(dto.getUser_id(), dto.getBtitle(), dto.getBcontent(), dto.getUser_name());
 			System.out.println("2");
 			Map<String, Object> msg = new HashMap();
 			msg.put("resCode", "입력 성공");

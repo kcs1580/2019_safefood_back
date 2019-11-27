@@ -65,6 +65,7 @@ public class RestMemberController {
 	@ApiOperation(value = "회원가입")
 	public ResponseEntity<Map<String, Object>> signUpMem(@RequestBody MemDTO dto, HttpServletRequest req) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
+		System.out.println(dto.toString());
 		try {
 			String[] allergyArr = dto.getAllergyArr();
 			String allergy = "";
@@ -72,8 +73,7 @@ public class RestMemberController {
 				allergy += str + " ";
 			
 			user.signUpMem(dto.getId(), dto.getPassword(), dto.getMname(), dto.getAddr(), dto.getTel(), allergy,
-					dto.getQuestion(), dto.getAnswer());
-			//System.out.println(dto.toString());
+					dto.getQuestion(), dto.getAnswer(), dto.getCalorie_goal());
 			Map msg = new HashMap();
 			msg.put("resMSG", dto.getId() + "입력 성공");
 			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
@@ -145,7 +145,7 @@ public class RestMemberController {
 		String allergy = "";
 		for (String str : allergyArr)
 			allergy += str + " ";
-		user.updateMem(mem.getId(),mem.getPassword(), mem.getMname(), mem.getAddr(), mem.getTel(), allergy);
+		user.updateMem(mem.getId(),mem.getPassword(), mem.getMname(), mem.getAddr(), mem.getTel(), allergy, mem.getCalorie_goal());
 		Map<String,Object> map = new HashMap();
 		map.put("resmsg",mem.getId()+ "수정 성공");
 		resEntity = new ResponseEntity<Map<String, Object>> (map,HttpStatus.OK);

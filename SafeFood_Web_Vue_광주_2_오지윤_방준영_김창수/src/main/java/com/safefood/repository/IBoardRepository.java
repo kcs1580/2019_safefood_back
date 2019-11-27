@@ -6,7 +6,7 @@ import com.safefood.dto.BoardDTO;
 import com.safefood.dto.CommentDTO;
 
 public interface IBoardRepository {
-	public boolean boardInsert(String bid, String user_id, String btitle, String bcontent);
+	public boolean boardInsert(String bid, String user_id, String btitle, String bcontent, String user_name);
 	
 	public List<BoardDTO> boardList();
 	

@@ -6,12 +6,12 @@
 <mapper namespace="com.member">
 
 	<insert id="memInsert" parameterType="MemDTO">
-		insert into user values(#{id}, #{password},#{mname},#{addr},#{tel},#{allergy},#{question},#{answer})
+		insert into user values(#{id}, #{password},#{mname},#{addr},#{tel},#{allergy},#{question},#{answer}, #{calorie_goal})
 	</insert>
 	<update id="memUpdate" parameterType="MemDTO">
 		update user set
 		password =
-		#{password}, mname = #{mname} ,addr = #{addr},tel=#{tel} where id =
+		#{password}, mname = #{mname} ,addr = #{addr},tel=#{tel}, calorie_goal=#{calorie_goal} where id =
 		#{id}
 	</update>
 

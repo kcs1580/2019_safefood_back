@@ -22,12 +22,13 @@ public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 	}
 
 	@Override
-	public boolean boardInsert(String bid, String user_id, String btitle, String bcontent) {
+	public boolean boardInsert(String bid, String user_id, String btitle, String bcontent, String user_name) {
 		BoardDTO m = new BoardDTO();
 		m.setBid(Integer.parseInt(bid));
 		m.setUser_id(user_id);
 		m.setBtitle(btitle);
 		m.setBcontent(bcontent);
+		m.setUser_name(user_name);
 		m.setBcount(0);
 		int res = session.insert("com.board.boardInsert", m);
 		if (res >= 1)

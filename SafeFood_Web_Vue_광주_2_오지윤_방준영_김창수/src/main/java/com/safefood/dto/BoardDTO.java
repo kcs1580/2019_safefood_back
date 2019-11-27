@@ -6,24 +6,26 @@ public class BoardDTO {
 	private String bcontent;
 	private int bcount;
 	private String user_id;
-	public BoardDTO() {
-		super();
-	}
-	public BoardDTO(int bid, String btitle, String bcontent, String bcomment, int bcount, String user_id) {
+	private String user_name;
+	
+	
+	public BoardDTO(int bid, String btitle, String bcontent, int bcount, String user_id, String user_name) {
 		super();
 		this.bid = bid;
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bcount = bcount;
 		this.user_id = user_id;
+		this.user_name = user_name;
 	}
-	
-	
-	public String getUser_id() {
-		return user_id;
+	public BoardDTO() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	@Override
+	public String toString() {
+		return "BoardDTO [bid=" + bid + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bcount=" + bcount
+				+ ", user_id=" + user_id + ", user_name=" + user_name + "]";
 	}
 	public int getBid() {
 		return bid;
@@ -49,9 +51,18 @@ public class BoardDTO {
 	public void setBcount(int bcount) {
 		this.bcount = bcount;
 	}
-	@Override
-	public String toString() {
-		return "BoardVo [bid=" + bid + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bcount=" + bcount + "]";
+	public String getUser_id() {
+		return user_id;
 	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	
 	
 }

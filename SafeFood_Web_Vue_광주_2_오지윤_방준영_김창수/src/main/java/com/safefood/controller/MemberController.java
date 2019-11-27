@@ -62,7 +62,7 @@ public class MemberController {
 		String allergy = "";
 		for (String str : allergyArr)
 			allergy += str + " ";
-		user.signUpMem(id, password, mname, addr, tel, allergy.substring(0, allergy.length() - 1), "", "");
+		user.signUpMem(id, password, mname, addr, tel, allergy.substring(0, allergy.length() - 1), "", "", 0);
 		mv.setViewName("index");
 		return mv;
 	}
@@ -103,11 +103,12 @@ public class MemberController {
 		String addr = req.getParameter("addr");
 		String tel = req.getParameter("tel");
 		String[] allergyArr = req.getParameterValues("allergy");
+		int calorie_goal = Integer.parseInt(req.getParameter("calorie_goal"));
 		System.out.println(Arrays.toString(allergyArr));
 		String allergy = "";
 		for (String str : allergyArr)
 			allergy += str + " ";
-		user.updateMem(id, password, mname, addr, tel, allergy);
+		user.updateMem(id, password, mname, addr, tel, allergy, calorie_goal);
 		mv.setViewName("index");
 		return mv;
 	}

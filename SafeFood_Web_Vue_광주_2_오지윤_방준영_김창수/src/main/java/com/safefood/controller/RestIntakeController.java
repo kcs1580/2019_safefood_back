@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.nurigo.java_sdk.api.Message;
 import com.safefood.dto.NoticeDTO;
 import com.safefood.dto.TakeInDTO;
 import com.safefood.dto.TakeinFoodDTO;
@@ -34,7 +36,8 @@ import com.safefood.service.INoticeService;
 import com.safefood.service.ITakeinFoodService;
 
 import io.swagger.annotations.ApiOperation;
-
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+//test
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
 @RequestMapping("/api")
@@ -55,7 +58,7 @@ public class RestIntakeController {
 	@ApiOperation(value = "섭취정보 검색 서비스")
 	private ResponseEntity<Map<String, Object>> searchintake(@PathVariable("keyword") String keyword,
 			@PathVariable("id") String id) {
-		System.out.println("Keyword, id ==>>" + keyword + " " + id);
+		
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
 
@@ -64,7 +67,7 @@ public class RestIntakeController {
 			map.put("resmsg", id + "조회 성공");
 			map.put("list", list);
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-			System.out.println(list.toString());
+			
 		} catch (Exception e) {
 
 			Map<String, Object> map = new HashMap();
@@ -150,8 +153,6 @@ public class RestIntakeController {
 	private ResponseEntity<Map<String, Object>> insertIntake(@PathVariable("id") String id,
 			@PathVariable("code") int code) {
 
-		// System.out.println(id+"추가됩니다"+code);
-		// System.out.println("테스트 " + id + " code" + code);
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
 			if (id != null) {
@@ -167,8 +168,42 @@ public class RestIntakeController {
 			msg.put("resCode", "입력 실패");
 			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		}
+		String api_key = "";
+		String api_secret = "";
+		Message coolsms = new Message(api_key, api_secret);
+		// 4 params(to, from, type, text) are mandatory. must be filled
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("to", "01063977067");
+		params.put("from", "01063977067");
+		params.put("type", "SMS");
+		params.put("text", "문자가 보내집니다요ㅠㅠ");
 
+		System.out.println(params.toString());
+		JSONObject obj = null;
+		try {
+			obj = (JSONObject) coolsms.send(params);
+			System.out.println(obj.toString());
+		} catch (CoolsmsException e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCode());
+		}
+
+		System.out.println("보내지나요4");
+
+		if ((boolean) obj.get("status") == true) {
+			// 메시지 보내기 성공 및 전송결과 출력
+			System.out.println("성공");
+			System.out.println(obj.get("group_id")); // 그룹아이디
+			System.out.println(obj.get("result_code")); // 결과코드
+			System.out.println(obj.get("result_message")); // 결과 메시지
+			System.out.println(obj.get("success_count")); // 메시지아이디
+			System.out.println(obj.get("error_count")); // 여러개 보낼시 오류난 메시지 수
+		} else {
+			// 메시지 보내기 실패
+			System.out.println("실패");
+			System.out.println(obj.get("code")); // REST API 에러코드
+			System.out.println(obj.get("message")); // 에러메시지
+		}
 		return resEntity;
-
 	}
 }
