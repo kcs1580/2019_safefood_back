@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- Member객체의 mybatis 설정 문제 -->
+<!-- Member객체의 mybatis d설정 문제 -->
 <mapper namespace="com.takein">
 
 
@@ -18,11 +18,11 @@
 	</insert>
 
 
-	<select id="intakeSelectOne" parameterType="int" resultType="TakeInDTO">
-		select * from intake where code=#{code}
+	<select id="intakeSelectOne" parameterType="TakeInDTO" resultType="TakeInDTO">
+		select * from intake where code=#{code} and id=#{id}
 	</select>
 
-	<select id="intakeSearch" parameterType="string"
+	<select id="intakeSearch" parameterType="TakeinSearchDTO"
 		resultType="TakeinFoodDTO">
 		select f.*, i.id, i.idate, i.icount from food as f join
 		intake as i on (f.code = i.code) where i.id = #{id} and
@@ -66,8 +66,12 @@ select sum(f.calory*i.icount) as calory,
 		#{id} and icount>0
 	</select>
 
-	<update id="intakeupdate" parameterType="TakeInDTO" >
+	<update id="intakeUpdate" parameterType="TakeInDTO" >
 		update intake set icount = icount+1 where code = #{code} and id = #{id} and idate = current_date()
 	</update>
+	
+	<delete id="intakeDelete" parameterType="TakeInDTO" >
+		delete from intake where code = #{code} and id = #{id}
+	</delete>
 
 </mapper>

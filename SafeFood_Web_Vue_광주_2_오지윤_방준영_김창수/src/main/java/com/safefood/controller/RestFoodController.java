@@ -195,13 +195,14 @@ public class RestFoodController {
 	@ApiOperation(value = "상품개수세기")
 	public @ResponseBody ResponseEntity<Map<String, Object>> countFood(HttpServletRequest request) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
-
+		System.out.println("countfood 왔니");
 		try {
 			int count = ser.countFood();
 
 			if (count == 0) {
 				// 절대경로 처리
 				String path = request.getServletContext().getRealPath("/res");
+				System.out.println(path);
 				String foodPath = "file:\\" + path + "\\FoodInfo.xml";
 				String nutPath = "file:\\" + path + "\\FoodNutritionInfo.xml";
 
