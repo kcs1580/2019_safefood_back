@@ -45,6 +45,7 @@ public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 	@Override
 	public BoardDTO boardInfo(int bid) {
 		BoardDTO board = session.selectOne("com.board.boardInfo", bid+"");
+		System.out.println("여기서" + board.toString());
 		return board;
 	}
 

@@ -168,9 +168,11 @@ public class RestIntakeController {
 			msg.put("resCode", "입력 실패");
 			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		}
+		
 		String api_key = "NCSOECLSYACOD9Y4";
 		String api_secret = "TNSP80ZKRLPGJE4XZH6GWBMMYGQ8JFGU";
 		Message coolsms = new Message(api_key, api_secret);
+		
 		// 4 params(to, from, type, text) are mandatory. must be filled
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("to", "01063977067");

@@ -90,12 +90,6 @@ public class RestMemberController {
 	@GetMapping("/memlist/{id}")
 	@ApiOperation(value = "회원정보찾기",response = List.class)
 	public  @ResponseBody ResponseEntity<Map<String,Object>>  findmem(@PathVariable("id") String id) {
-//		String id = req.getParameter("id");
-//		MemDTO mem = user.infoMem(id);
-//		mv.addObject("mem", mem);
-//		mv.setViewName("/member/memview");
-//		return mv;
-
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		MemDTO mem = null;
 		try {
@@ -110,6 +104,7 @@ public class RestMemberController {
 			map.put("resvalue", mem);
 			resEntity = new ResponseEntity<Map<String, Object>> (map,HttpStatus.OK);
 		}
+		System.out.println(mem.toString());
 		return resEntity;
 	}
 
