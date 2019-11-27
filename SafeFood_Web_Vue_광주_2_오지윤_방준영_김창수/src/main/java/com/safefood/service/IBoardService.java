@@ -15,7 +15,7 @@ public interface IBoardService {
 
 	public List<BoardDTO> listBoard();
 
-	public boolean registerBoard(String user_id, String btitle, String bcontent);
+	public boolean registerBoard(String user_id, String btitle, String bcontent, String user_name);
 	
 	public List<BoardDTO> searchBoard(String keyword);
 

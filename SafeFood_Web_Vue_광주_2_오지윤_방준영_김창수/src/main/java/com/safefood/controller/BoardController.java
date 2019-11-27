@@ -54,7 +54,8 @@ public class BoardController {
 		String user_id = request.getParameter("user_id");
 		String btitle = request.getParameter("btitle");
 		String bcontent = request.getParameter("bcontent");
-		boolean res = bSer.registerBoard(user_id, btitle, bcontent);
+		String user_name = request.getParameter("user_name");
+		boolean res = bSer.registerBoard(user_id, btitle, bcontent,user_name);
 		System.out.println("board test " + res);
 		if(res) {
 			mv.setViewName("redirect:listboard");
