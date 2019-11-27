@@ -55,7 +55,7 @@ public class RestIntakeController {
 	@ApiOperation(value = "섭취정보 검색 서비스")
 	private ResponseEntity<Map<String, Object>> searchintake(@PathVariable("keyword") String keyword,
 			@PathVariable("id") String id) {
-		System.out.println("Keyword, id ==>>" + keyword + " " + id);
+		
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
 
@@ -64,7 +64,7 @@ public class RestIntakeController {
 			map.put("resmsg", id + "조회 성공");
 			map.put("list", list);
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-			System.out.println(list.toString());
+			
 		} catch (Exception e) {
 
 			Map<String, Object> map = new HashMap();
