@@ -72,7 +72,7 @@
 	</delete>
 	
 	<select id="chatList" resultType="ChatDTO">
-		select * from chat order by cnum desc limit 15
+		select * from chat order by cnum desc limit 10
 	</select>
 	
 	<insert id="chatInsert" parameterType="ChatDTO">

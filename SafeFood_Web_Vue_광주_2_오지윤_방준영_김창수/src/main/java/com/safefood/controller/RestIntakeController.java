@@ -114,7 +114,6 @@ public class RestIntakeController {
 
 	@GetMapping("/selectoneintake")
 	@ApiOperation(value = "섭취정보 선택 서비스")
-
 	private ResponseEntity<Map<String, Object>> selectOneIntake(@RequestBody TakeInDTO dto) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
@@ -132,7 +131,7 @@ public class RestIntakeController {
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
 		return resEntity;
-
+		
 	}
 
 	@DeleteMapping("/deleteintake/{id}/{code}")
