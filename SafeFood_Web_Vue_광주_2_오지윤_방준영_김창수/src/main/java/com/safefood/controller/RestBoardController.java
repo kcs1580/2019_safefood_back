@@ -199,9 +199,7 @@ public class RestBoardController {
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		List<CommentDTO> list = null;
 		try {
-			list = bSer.commentList(bid);
-			BoardDTo board = bSer.infoBoard(bid);
-			String userName = user.infoMem(id)
+			list = bSer.commentList(bid);			
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", "조회 성공");
 			map.put("resvalue", list);
