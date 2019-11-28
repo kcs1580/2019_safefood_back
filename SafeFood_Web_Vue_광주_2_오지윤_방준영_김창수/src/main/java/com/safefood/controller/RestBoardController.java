@@ -38,6 +38,7 @@ import com.safefood.dto.ChatDTO;
 import com.safefood.dto.CommentDTO;
 import com.safefood.dto.NoticeDTO;
 import com.safefood.service.IBoardService;
+import com.safefood.service.IMemberService;
 import com.safefood.service.INoticeService;
 import com.safefood.service.NoticeServiceImpl;
 
@@ -58,7 +59,11 @@ public class RestBoardController {
 	@Autowired
 	@Qualifier("BoardServiceImpl")
 	IBoardService bSer;
-
+	
+	@Autowired
+	@Qualifier("MemberServiceImpl")
+	IMemberService user;
+	
 	@GetMapping("/Boardpage")
 	@ApiOperation(value = "baordlist 페이지 이동 서비스")
 	public String noticeInsertPage() {
@@ -194,7 +199,7 @@ public class RestBoardController {
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		List<CommentDTO> list = null;
 		try {
-			list = bSer.commentList(bid);
+			list = bSer.commentList(bid);			
 			Map<String, Object> map = new HashMap();
 			map.put("resmsg", "조회 성공");
 			map.put("resvalue", list);
