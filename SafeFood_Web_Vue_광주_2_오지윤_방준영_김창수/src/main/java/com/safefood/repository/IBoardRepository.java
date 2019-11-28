@@ -30,4 +30,7 @@ public interface IBoardRepository {
 	public boolean registerChat (int cnum, String ccontent, String user_id,String user_name);
 	
 	public List<ChatDTO> chatList();
+	public List<BoardDTO> searchBoardByName(String keyword);
+
+	public List<BoardDTO> searchBoardByTitle(String keyword);
 }

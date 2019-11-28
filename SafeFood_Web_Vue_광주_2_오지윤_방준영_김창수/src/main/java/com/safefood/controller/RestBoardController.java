@@ -36,6 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.safefood.dto.BoardDTO;
 import com.safefood.dto.ChatDTO;
 import com.safefood.dto.CommentDTO;
+import com.safefood.dto.FoodDTO;
 import com.safefood.dto.NoticeDTO;
 import com.safefood.service.IBoardService;
 import com.safefood.service.IMemberService;
@@ -70,7 +71,36 @@ public class RestBoardController {
 		return "/board/board_list";
 	}
 
+	@GetMapping("/searchBoardByKeyword/{selection}/{keyword}")
+	@ApiOperation(value = "selection기준으로 키워드로찾기")
+	public @ResponseBody ResponseEntity<Map<String, Object>> searchFoodByKeyword(
+			@PathVariable("selection") String selection, @PathVariable("keyword") String keyword) {
+		ResponseEntity<Map<String, Object>> resEntity = null;
+		
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
+		try {
+			if (selection.equals("q_name")) {
+				list = bSer.searchBoardByName(keyword);
+			} else if (selection.equals("q_title")) {
+				list = bSer.searchBoardByTitle(keyword);
+			}
+			
 
+			Map<String, Object> map = new HashMap();
+			map.put("resmsg", " 조회 성공");
+			map.put("list", list);
+			
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+
+		} catch (RuntimeException e) {
+			Map<String, Object> map = new HashMap();
+			map.put("resmsg", "조회 실패");
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+
+		}
+		return resEntity;
+	}
+	
 	@PostMapping("/registerboard")
 	@ApiOperation(value = "board 등록 서비스")
 	private ResponseEntity<Map<String, Object>> registerBoard(@RequestBody BoardDTO dto) {

@@ -142,4 +142,16 @@ public class BoardMyBatisRepositoryImpl implements IBoardRepository {
 		return selectList;
 	}
 
+	@Override
+	public List<BoardDTO> searchBoardByName(String keyword) {
+		List<BoardDTO> selectList = session.selectList("com.board.searchByName", keyword);
+		return selectList;
+	}
+
+	@Override
+	public List<BoardDTO> searchBoardByTitle(String keyword) {
+		List<BoardDTO> selectList = session.selectList("com.board.searchByTitle", keyword);
+		return selectList;
+	}
+
 }
