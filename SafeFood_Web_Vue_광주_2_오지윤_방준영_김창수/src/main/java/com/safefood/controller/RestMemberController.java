@@ -1,4 +1,3 @@
-
 package com.safefood.controller;
 
 import java.io.IOException;
@@ -141,7 +140,7 @@ public class RestMemberController {
 	@ApiOperation(value = "id를 받아 멤버 수정 서비스")
 	public ResponseEntity<Map<String, Object>> updateMem(@RequestBody MemDTO mem, HttpServletRequest req,
 			ModelAndView mv) {
-		System.out.println(mem.toString() + "/memupdate 테스트용도다!");
+		//System.out.println(mem.toString() + "/memupdate 테스트용도다!");
 		ResponseEntity<Map<String, Object>> resEntity = null;
 		try {
 			String[] allergyArr = mem.getAllergyArr();
