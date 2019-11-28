@@ -181,7 +181,7 @@ public class RestIntakeController {
 		MemDTO member = user.infoMem(id);
 		//이거 바꾸세요~
 		//if(member.getCalorie_goal() < tSer.intakeSum(id).getCalory()) {
-		if(member.getCalorie_goal() < 99999999) {
+		if(member.getCalorie_goal() > 99999999) {
 		
 			String api_key = "NCSKO0UT5HVZG8MW";
 			String api_secret = "O84KVD9LPVAJL73XX84VQG4KKKC1YX4Z";
