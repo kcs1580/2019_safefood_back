@@ -179,7 +179,7 @@ public class RestIntakeController {
 		
 		// 해당 유저의 goal Calories에 도달하면 문자메세지 전송합니다...
 		MemDTO member = user.infoMem(id);
-		//이거 바꾸세요~
+		//이거 바꾸세요
 		if(member.getCalorie_goal() < tSer.intakeSum(id).getCalory()) {
 //		if(member.getCalorie_goal() > 99999999) {
 		
