@@ -20,6 +20,8 @@
 		<typeAlias type="com.safefood.dto.TakeinSearchDTO" alias="TakeinSearchDTO" />
 		
 		<typeAlias type="com.safefood.dto.CommentDTO" alias="CommentDTO" />
+		<typeAlias type="com.safefood.dto.ChatDTO" alias="ChatDTO" />
+		
 		
 	</typeAliases>
 	

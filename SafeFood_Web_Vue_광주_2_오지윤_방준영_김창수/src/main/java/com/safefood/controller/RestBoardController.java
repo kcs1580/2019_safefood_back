@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.safefood.dto.BoardDTO;
+import com.safefood.dto.ChatDTO;
 import com.safefood.dto.CommentDTO;
 import com.safefood.dto.NoticeDTO;
 import com.safefood.service.IBoardService;
@@ -219,7 +220,7 @@ public class RestBoardController {
 	@ApiOperation(value = "Comment 제거 서비스")
 	private ResponseEntity<Map<String, Object>> deleteComment(@PathVariable("cnum") int cnum) {
 		ResponseEntity<Map<String, Object>> resEntity = null;
-		System.out.println(cnum);
+		//System.out.println(cnum);
 		try {
 			boolean res = bSer.commentDelete(cnum);
 			Map<String, Object> map = new HashMap();
@@ -237,11 +238,10 @@ public class RestBoardController {
 	@PostMapping("/registercomment")
 	@ApiOperation(value = "Comment 등록 서비스")
 	private ResponseEntity<Map<String, Object>> registerComment(@RequestBody CommentDTO dto) {
-		ResponseEntity<Map<String, Object>> resEntity = null;
-		
+		ResponseEntity<Map<String, Object>> resEntity = null;		
 		try {
-			
-			boolean res = bSer.registerComment(0,dto.getBid(),dto.getCcontent() , dto.getUser_id());
+			System.out.println(dto.toString());
+			boolean res = bSer.registerComment(0,dto.getBid(),dto.getCcontent() , dto.getUser_id(),dto.getUser_name());
 			
 			Map<String, Object> msg = new HashMap();
 			msg.put("resCode", "succ");
@@ -251,6 +251,46 @@ public class RestBoardController {
 			Map<String, Object> msg = new HashMap();
 			msg.put("resCode", "입력 실패");
 			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+		}
+		return resEntity;
+	}
+	
+	@PostMapping("/registerchat")
+	@ApiOperation(value = "chat 등록 서비스")
+	private ResponseEntity<Map<String, Object>> registerChat(@RequestBody ChatDTO dto) {
+		ResponseEntity<Map<String, Object>> resEntity = null;		
+		try {
+			System.out.println(dto.toString());
+			boolean res = bSer.registerChat(0,dto.getCcontent() , dto.getUser_id(),dto.getUser_name());
+			
+			Map<String, Object> msg = new HashMap();
+			msg.put("resCode", "succ");
+			msg.put("resvalue", res);
+			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+		} catch (RuntimeException e) {
+			Map<String, Object> msg = new HashMap();
+			msg.put("resCode", "입력 실패");
+			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
+		}
+		return resEntity;
+	}
+	
+	@GetMapping("/listchat")
+	@ApiOperation(value = "Chat 리스트 서비스", response = List.class)
+	private ResponseEntity<Map<String, Object>> listChat() {
+		ResponseEntity<Map<String, Object>> resEntity = null;
+		List<ChatDTO> list = null;
+		try {
+			list = bSer.chatList();
+			Map<String, Object> map = new HashMap();
+			map.put("resmsg", "조회 성공");
+			map.put("resvalue", list);
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		}catch(RuntimeException e){
+			Map<String, Object> map = new HashMap();
+			map.put("resmsg", "조회실패");
+			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+
 		}
 		return resEntity;
 	}

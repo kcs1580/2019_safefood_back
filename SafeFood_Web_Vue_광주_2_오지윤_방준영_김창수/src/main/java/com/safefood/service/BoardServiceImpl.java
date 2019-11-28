@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.safefood.dto.BoardDTO;
+import com.safefood.dto.ChatDTO;
 import com.safefood.dto.CommentDTO;
 import com.safefood.repository.IBoardRepository;
 
@@ -63,10 +64,10 @@ public class BoardServiceImpl implements IBoardService {
 	}
 
 	@Override
-	public boolean registerComment(int cnum, int bid, String ccontent, String user_id) {
+	public boolean registerComment(int cnum, int bid, String ccontent, String user_id,String user_name) {
 		// TODO Auto-generated method stub
 			
-		boolean res = dao.registerComment(0, bid, ccontent, user_id);
+		boolean res = dao.registerComment(0, bid, ccontent, user_id,user_name);
 		return res;
 	}
 
@@ -82,6 +83,19 @@ public class BoardServiceImpl implements IBoardService {
 		// TODO Auto-generated method stub
 		boolean res = dao.commentDelete(cnum);
 		return res;
+	}
+
+	@Override
+	public boolean registerChat(int cnum, String ccontent, String user_id, String user_name) {
+		// TODO Auto-generated method stub
+		boolean res = dao.registerChat(0, ccontent, user_id,user_name);
+		return res;
+	}
+
+	@Override
+	public List<ChatDTO> chatList() {
+		List<ChatDTO> list = dao.chatList();
+		return list;
 	}
 	
 	

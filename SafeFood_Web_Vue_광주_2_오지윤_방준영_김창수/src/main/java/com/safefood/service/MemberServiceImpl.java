@@ -14,8 +14,9 @@ public class MemberServiceImpl implements IMemberService {
 	@Autowired
 	@Qualifier("MemberMyBatisRepositoryImpl")
 	IMemberRepository repo;
-		
-	public MemberServiceImpl() {}
+
+	public MemberServiceImpl() {
+	}
 
 	@Override
 	public boolean loginMem(String id, String password) {
@@ -24,19 +25,20 @@ public class MemberServiceImpl implements IMemberService {
 
 	@Override
 	public MemDTO findPw(String id, String question, String answer) {
-		repo.memFind(id,question,answer);
+		repo.memFind(id, question, answer);
 		return null;
 	}
 
 	@Override
 	public void signUpMem(String id, String password, String mname, String addr, String tel, String allergy,
 			String question, String answer, int calorie_goal) {
-		repo.memInsert(new MemDTO(id,password,mname,addr,tel,allergy,question,answer, calorie_goal));
+		repo.memInsert(new MemDTO(id, password, mname, addr, tel, allergy, question, answer, calorie_goal));
 	}
 
 	@Override
-	public void updateMem(String id, String password, String mname, String addr, String tel, String allergy, int calorie_goal) {
-		repo.memUpdate(new MemDTO(id,password,mname,addr,tel,allergy,calorie_goal));
+	public void updateMem(String id, String password, String mname, String addr, String tel, String allergy,
+			int calorie_goal) {
+		repo.memUpdate(new MemDTO(id, password, mname, addr, tel, allergy, calorie_goal));
 	}
 
 	@Override

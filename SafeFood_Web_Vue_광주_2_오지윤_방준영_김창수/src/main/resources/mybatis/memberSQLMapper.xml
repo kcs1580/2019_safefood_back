@@ -11,7 +11,7 @@
 	<update id="memUpdate" parameterType="MemDTO">
 		update user set
 		password =
-		#{password}, mname = #{mname} ,addr = #{addr},tel=#{tel}, calorie_goal=#{calorie_goal} where id =
+		#{password}, mname = #{mname} ,addr = #{addr},tel=#{tel}, allergy = #{allergy}, calorie_goal=#{calorie_goal} where id =
 		#{id}
 	</update>
 
