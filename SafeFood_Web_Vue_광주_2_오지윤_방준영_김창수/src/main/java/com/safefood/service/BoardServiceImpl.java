@@ -97,6 +97,18 @@ public class BoardServiceImpl implements IBoardService {
 		List<ChatDTO> list = dao.chatList();
 		return list;
 	}
+
+	@Override
+	public List<BoardDTO> searchBoardByName(String keyword) {
+		
+		return dao.searchBoardByName(keyword);
+	}
+
+	@Override
+	public List<BoardDTO> searchBoardByTitle(String keyword) {
+		
+		return dao.searchBoardByTitle(keyword);
+	}
 	
 	
 
