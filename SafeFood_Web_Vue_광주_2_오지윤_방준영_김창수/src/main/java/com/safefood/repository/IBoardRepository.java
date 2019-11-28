@@ -3,6 +3,7 @@ package com.safefood.repository;
 import java.util.List;
 
 import com.safefood.dto.BoardDTO;
+import com.safefood.dto.ChatDTO;
 import com.safefood.dto.CommentDTO;
 
 public interface IBoardRepository {
@@ -20,9 +21,13 @@ public interface IBoardRepository {
 
 	public boolean countUp(int nid);
 	
-	public boolean registerComment(int cnum, int bid, String ccontent, String user_id);
+	public boolean registerComment(int cnum, int bid, String ccontent, String user_id,String user_name);
 	
 	public List<CommentDTO> commentList(int bid);
 	
 	public boolean commentDelete(int cnum);
+	
+	public boolean registerChat (int cnum, String ccontent, String user_id,String user_name);
+	
+	public List<ChatDTO> chatList();
 }

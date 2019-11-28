@@ -27,17 +27,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.nurigo.java_sdk.api.Message;
+
+import com.safefood.dto.MemDTO;
 import com.safefood.dto.NoticeDTO;
 import com.safefood.dto.TakeInDTO;
 import com.safefood.dto.TakeinFoodDTO;
 import com.safefood.dto.TakeinSearchDTO;
 import com.safefood.dto.TakeinSumDTO;
+import com.safefood.service.IMemberService;
 import com.safefood.service.INoticeService;
 import com.safefood.service.ITakeinFoodService;
 
 import io.swagger.annotations.ApiOperation;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
-//test
+//tests
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @RestController
 @RequestMapping("/api")
@@ -54,6 +57,11 @@ public class RestIntakeController {
 	@Qualifier("TakeinFoodServiceImpl")
 	ITakeinFoodService tSer;
 
+	@Autowired
+	@Qualifier("MemberServiceImpl")
+	IMemberService user;
+
+	
 	@GetMapping("/searchintake/{keyword}/{id}")
 	@ApiOperation(value = "섭취정보 검색 서비스")
 	private ResponseEntity<Map<String, Object>> searchintake(@PathVariable("keyword") String keyword,
@@ -66,6 +74,7 @@ public class RestIntakeController {
 			List<TakeinFoodDTO> list = tSer.intakeSearch(new TakeinSearchDTO(id, keyword));
 			map.put("resmsg", id + "조회 성공");
 			map.put("list", list);
+			
 			resEntity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			
 		} catch (Exception e) {
@@ -163,47 +172,56 @@ public class RestIntakeController {
 				resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 			}
 		} catch (Exception e) {
-
 			Map<String, Object> msg = new HashMap();
 			msg.put("resCode", "입력 실패");
 			resEntity = new ResponseEntity<Map<String, Object>>(msg, HttpStatus.OK);
 		}
-		String api_key = "";
-		String api_secret = "";
-		Message coolsms = new Message(api_key, api_secret);
-		// 4 params(to, from, type, text) are mandatory. must be filled
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("to", "01063977067");
-		params.put("from", "01063977067");
-		params.put("type", "SMS");
-		params.put("text", "문자가 보내집니다요ㅠㅠ");
+		
+		// 해당 유저의 goal Calories에 도달하면 문자메세지 전송합니다...
+		MemDTO member = user.infoMem(id);
+		//이거 바꾸세요~
+		//if(member.getCalorie_goal() < tSer.intakeSum(id).getCalory()) {
+		if(member.getCalorie_goal() > 99999999) {
+		
+			String api_key = "NCSKO0UT5HVZG8MW";
+			String api_secret = "O84KVD9LPVAJL73XX84VQG4KKKC1YX4Z";
+			Message coolsms = new Message(api_key, api_secret);
+			
+			// 4 params(to, from, type, text) are mandatory. must be filled
+			HashMap<String, String> params = new HashMap<String, String>();
+			params.put("from", "01063977067"); // 발신번호
+			params.put("to", member.getTel()); // 수신번호
+			
+			params.put("type", "SMS");
+			params.put("text", member.getMname() + "님! 설정 해주신 일일 칼로리 " + member.getCalorie_goal() + "kcal를 초과하셨습니다. 그만드세요!!");
+			System.out.println(params.toString());
+			JSONObject obj = null;
+			try {
+				obj = (JSONObject) coolsms.send(params);
+				System.out.println(obj.toString());
+			} catch (CoolsmsException e) {
+				System.out.println(e.getMessage());
+				System.out.println(e.getCode());
+			}
 
-		System.out.println(params.toString());
-		JSONObject obj = null;
-		try {
-			obj = (JSONObject) coolsms.send(params);
-			System.out.println(obj.toString());
-		} catch (CoolsmsException e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCode());
+			System.out.println("보내지나요4");
+
+			if ((boolean) obj.get("status") == true) {
+				// 메시지 보내기 성공 및 전송결과 출력
+				System.out.println("성공");
+				System.out.println(obj.get("group_id")); // 그룹아이디
+				System.out.println(obj.get("result_code")); // 결과코드
+				System.out.println(obj.get("result_message")); // 결과 메시지
+				System.out.println(obj.get("success_count")); // 메시지아이디
+				System.out.println(obj.get("error_count")); // 여러개 보낼시 오류난 메시지 수
+			} else {
+				// 메시지 보내기 실패
+				System.out.println("실패");
+				System.out.println(obj.get("code")); // REST API 에러코드
+				System.out.println(obj.get("message")); // 에러메시지
+			}
 		}
-
-		System.out.println("보내지나요4");
-
-		if ((boolean) obj.get("status") == true) {
-			// 메시지 보내기 성공 및 전송결과 출력
-			System.out.println("성공");
-			System.out.println(obj.get("group_id")); // 그룹아이디
-			System.out.println(obj.get("result_code")); // 결과코드
-			System.out.println(obj.get("result_message")); // 결과 메시지
-			System.out.println(obj.get("success_count")); // 메시지아이디
-			System.out.println(obj.get("error_count")); // 여러개 보낼시 오류난 메시지 수
-		} else {
-			// 메시지 보내기 실패
-			System.out.println("실패");
-			System.out.println(obj.get("code")); // REST API 에러코드
-			System.out.println(obj.get("message")); // 에러메시지
-		}
+		
 		return resEntity;
 	}
 }

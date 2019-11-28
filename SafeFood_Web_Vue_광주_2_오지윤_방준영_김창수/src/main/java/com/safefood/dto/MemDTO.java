@@ -25,11 +25,23 @@ public class MemDTO {
 		return calorie_goal;
 	}
 
+	public MemDTO(String id, String password, String mname, String addr, String tel, 
+			String[] allergyArr, int calorie_goal) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.mname = mname;
+		this.addr = addr;
+		this.tel = tel;
+		this.allergyArr = allergyArr;
+		this.calorie_goal = calorie_goal;
+	}
+
 	public void setCalorie_goal(int calorie_goal) {
 		this.calorie_goal = calorie_goal;
 	}
 
-	public MemDTO(String id, String password, String mname, String addr, String tel, String allergy, String question,
+	public MemDTO(String id, String password, String mname, String addr, String tel, String question,
 			String answer, String[] allergyArr, int calorie_goal) {
 		super();
 		this.id = id;
@@ -37,7 +49,6 @@ public class MemDTO {
 		this.mname = mname;
 		this.addr = addr;
 		this.tel = tel;
-		this.allergy = allergy;
 		this.question = question;
 		this.answer = answer;
 		this.allergyArr = allergyArr;
@@ -52,19 +63,6 @@ public class MemDTO {
 		this.allergyArr = allergyArr;
 	}
 
-	public MemDTO(String id, String password, String mname, String addr, String tel, String allergy, String question,
-			String answer, String[] allergyArr) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.mname = mname;
-		this.addr = addr;
-		this.tel = tel;
-		this.allergy = allergy;
-		this.question = question;
-		this.answer = answer;
-		this.allergyArr = allergyArr;
-	}
 
 	public MemDTO() {
 		super();

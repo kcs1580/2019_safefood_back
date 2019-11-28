@@ -52,7 +52,7 @@
 	
 	<insert id="commentInsert" parameterType="CommentDTO">
 		insert into comment values(
-		#{cnum}, #{bid}, #{ccontent}, #{user_id}
+		#{cnum}, #{bid}, #{ccontent}, #{user_id} , (select mname from user where id = #{user_id} )
 		)
 	</insert>
 	
@@ -60,6 +60,18 @@
 		delete from comment where cnum = #{cnum};
 		
 	</delete>
+	
+	<select id="chatList" resultType="ChatDTO">
+		select * from chat 
+	</select>
+	
+	<insert id="chatInsert" parameterType="ChatDTO">
+		insert into chat values(
+		#{cnum}, #{ccontent}, #{user_id} , (select mname from user where id = #{user_id} )
+		)
+	</insert>
+	
+	
 	
 	
 </mapper>
