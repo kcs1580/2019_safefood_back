@@ -258,7 +258,7 @@ public class RestBoardController {
 	private ResponseEntity<Map<String, Object>> registerChat(@RequestBody ChatDTO dto) {
 		ResponseEntity<Map<String, Object>> resEntity = null;		
 		try {
-			System.out.println(dto.toString());
+			
 			boolean res = bSer.registerChat(0,dto.getCcontent() , dto.getUser_id(),dto.getUser_name());
 			
 			Map<String, Object> msg = new HashMap();
